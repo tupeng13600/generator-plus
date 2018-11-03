@@ -6,4 +6,8 @@ public abstract class StringUtils {
         return desPackage.replaceAll("\\.", "/").concat("/");
     }
 
+    public static Boolean isBlank(String source){
+        return null == source || "".equals(source.trim());
+    }
+
 }
