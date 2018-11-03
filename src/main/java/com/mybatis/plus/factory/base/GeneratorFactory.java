@@ -1,4 +1,4 @@
-package com.mybatis.plus.filter.base;
+package com.mybatis.plus.factory.base;
 
 import com.mybatis.plus.context.DataSourceConfig;
 import com.mybatis.plus.context.PlusContext;
@@ -6,7 +6,6 @@ import com.mybatis.plus.model.PropertyModel;
 import com.mybatis.plus.util.FreeMarkerUtils;
 import com.mybatis.plus.util.JDBCUtil;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

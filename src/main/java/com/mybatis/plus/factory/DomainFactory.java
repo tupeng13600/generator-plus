@@ -1,7 +1,7 @@
-package com.mybatis.plus.filter;
+package com.mybatis.plus.factory;
 
 import com.mybatis.plus.context.PlusContext;
-import com.mybatis.plus.filter.base.GeneratorFactory;
+import com.mybatis.plus.factory.base.GeneratorFactory;
 import com.mybatis.plus.model.PropertyModel;
 
 import java.util.*;
