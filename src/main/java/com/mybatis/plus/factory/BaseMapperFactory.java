@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class BaseMapperFactory extends GeneratorFactory {
 
+    private static String NAME = "BaseMapper";
+
     @Override
     protected String templateName() {
         return Constant.BASE_MAPPER_TEMPLATE;
@@ -32,6 +34,11 @@ public class BaseMapperFactory extends GeneratorFactory {
     @Override
     public void generate() {
         Map<String, Object> args = ArgsFactory.initArg();
-        FreeMarkerUtils.writeFiles(desPath("BaseMapper"), templateName(), args,false);
+        FreeMarkerUtils.writeFiles(desPath(NAME), templateName(), args,false);
     }
+
+    public static void write(){
+        new BaseMapperFactory().generate();
+    }
+
 }

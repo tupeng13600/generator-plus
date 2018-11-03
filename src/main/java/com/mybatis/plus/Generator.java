@@ -13,25 +13,18 @@ public class Generator {
         PlusContext.setLombokEnable(true);
         DomainFactory domainFactory = new DomainFactory();
         domainFactory.generate();
-
         ExampleFactory exampleFactory = new ExampleFactory();
         exampleFactory.generate();
-
-        XmlMapperFactory xmlcomMapperFactory = new XmlMapperFactory();
+        XmlMapperFactory xmlMapperFactory = new XmlMapperFactory();
         xmlMapperFactory.generate();
-
         BaseMapperFactory baseMapperFactory = new BaseMapperFactory();
         baseMapperFactory.generate();
-
         MapperFactory mapperFactory = new MapperFactory();
         mapperFactory.generate();
-
         XmlExtMapperFactory xmlExtMapperFactory = new XmlExtMapperFactory();
         xmlExtMapperFactory.generate();
-
         BaseRepositoryFactory baseRepositoryFactory = new BaseRepositoryFactory();
         baseRepositoryFactory.generate();
-
         RepositoryFactory repositoryFactory = new RepositoryFactory();
         repositoryFactory.generate();
 

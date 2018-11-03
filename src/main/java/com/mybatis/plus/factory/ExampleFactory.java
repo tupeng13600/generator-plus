@@ -11,6 +11,8 @@ import java.util.*;
 
 public class ExampleFactory extends GeneratorFactory {
 
+    private static String SUFFIX = "Example";
+
     @Override
     protected String templateName() {
         return Constant.EXAMPLE_TEMPLATE;
@@ -24,6 +26,10 @@ public class ExampleFactory extends GeneratorFactory {
     @Override
     protected String desPath(String domainName) {
         String examplePath = StringUtils.package2Path(PlusContext.getExamplePackage());
-        return Constant.JAVA_BASE_PATH.concat(examplePath).concat(domainName).concat("Example").concat(".java");
+        return Constant.JAVA_BASE_PATH.concat(examplePath).concat(domainName).concat(SUFFIX).concat(Constant.JAVA_SUFFIX);
+    }
+
+    public static void write() {
+        new ExampleFactory().generate();
     }
 }

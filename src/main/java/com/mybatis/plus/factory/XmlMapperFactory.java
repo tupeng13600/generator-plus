@@ -11,6 +11,8 @@ import java.util.*;
 
 public class XmlMapperFactory extends GeneratorFactory {
 
+    private static String SUFFIX = "Mapper";
+
     @Override
     protected String templateName() {
         return Constant.XML_TEMPLATE;
@@ -26,6 +28,10 @@ public class XmlMapperFactory extends GeneratorFactory {
     @Override
     protected String desPath(String domainName) {
         String xmlPath = StringUtils.package2Path(PlusContext.getXmlPackage());
-        return Constant.RESOURCE_BASE_PATH.concat(xmlPath).concat(domainName).concat("Mapper").concat(Constant.XML_SUFFIX);
+        return Constant.RESOURCE_BASE_PATH.concat(xmlPath).concat(domainName).concat(SUFFIX).concat(Constant.XML_SUFFIX);
+    }
+
+    public static void write() {
+        new XmlMapperFactory().generate();
     }
 }

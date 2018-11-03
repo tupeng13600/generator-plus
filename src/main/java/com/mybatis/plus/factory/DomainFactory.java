@@ -29,4 +29,8 @@ public class DomainFactory extends GeneratorFactory {
         return Constant.JAVA_BASE_PATH.concat(domainPath).concat(domainName).concat(Constant.JAVA_SUFFIX);
     }
 
+    public static void write() {
+        new DomainFactory().generate();
+    }
+
 }

@@ -11,6 +11,8 @@ import java.util.*;
 
 public class MapperFactory extends GeneratorFactory {
 
+    private static String SUFFIX = "Mapper";
+
     @Override
     protected String templateName() {
         return Constant.MAPPER_TEMPLATE;
@@ -24,6 +26,10 @@ public class MapperFactory extends GeneratorFactory {
     @Override
     protected String desPath(String domainName) {
         String examplePath = StringUtils.package2Path(PlusContext.getMapperPackage());
-        return Constant.JAVA_BASE_PATH.concat(examplePath).concat(domainName).concat("Mapper").concat(Constant.JAVA_SUFFIX);
+        return Constant.JAVA_BASE_PATH.concat(examplePath).concat(domainName).concat(SUFFIX).concat(Constant.JAVA_SUFFIX);
+    }
+
+    public static void write() {
+        new MapperFactory().generate();
     }
 }

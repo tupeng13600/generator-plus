@@ -33,7 +33,6 @@ public abstract class GeneratorFactory {
         domainMap.forEach((domainName, fieldList) -> {
             String templateName = templateName();
             Map<String, Object> templateArgs = templateArgs(domainName, fieldList);
-            templateArgs.put("lombokEnable", PlusContext.getLombokEnable());
             Boolean override = (Boolean) templateArgs.get("override");
             FreeMarkerUtils.writeFiles(desPath(domainName), templateName, templateArgs, override == null ? true : override);
         });
