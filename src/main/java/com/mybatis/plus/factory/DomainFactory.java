@@ -1,8 +1,11 @@
 package com.mybatis.plus.factory;
 
+import com.mybatis.plus.constant.Constant;
+import com.mybatis.plus.context.ArgsFactory;
 import com.mybatis.plus.context.PlusContext;
 import com.mybatis.plus.factory.base.GeneratorFactory;
 import com.mybatis.plus.model.PropertyModel;
+import com.mybatis.plus.util.StringUtils;
 
 import java.util.*;
 
@@ -11,62 +14,19 @@ public class DomainFactory extends GeneratorFactory {
 
     @Override
     protected String templateName() {
-        return "domain.ftl";
+        return Constant.DOMAIN_TEMPLATE;
     }
 
     @Override
     protected Map<String, Object> templateArgs(String domainName, List<PropertyModel> propertyList) {
-        Map<String, Object> args = new HashMap<>();
-
-        Set<String> importList = new HashSet<>();
-        for (PropertyModel property : propertyList) {
-            if(null != property.getFullTypeName() && !"".equals(property.getFullTypeName().trim())) {
-                importList.add(property.getFullTypeName());
-            }
-        }
-        args.put("propertyList", propertyList);
-        args.put("domain", domainName);
-        args.put("importList", importList);
-        args.put("package", PlusContext.getDomainPackage());
-        return args;
+        return ArgsFactory.initArg(domainName, propertyList);
     }
 
 
     @Override
     protected String desPath(String domainName) {
-        String prefix = "/src/main/java/";
-        String domainPath = PlusContext.getDomainPackage().replaceAll("\\.", "/").concat("/");
-        return prefix.concat(domainPath).concat(domainName).concat(".java");
-    }
-
-    public static void main(String[] args) {
-        PlusContext.setRepositoryPackage("com.mybatis.plus.generate.repository");
-        PlusContext.setDataSource("127.0.0.1", "3306", "sjs", "root", "Txx@13600");
-        PlusContext.setLombokEnable(true);
-        DomainFactory domainFactory = new DomainFactory();
-        domainFactory.generate();
-
-        ExampleFactory exampleFactory = new ExampleFactory();
-        exampleFactory.generate();
-
-        XmlMapperFactory xmlMapperFactory = new XmlMapperFactory();
-        xmlMapperFactory.generate();
-
-        BaseMapperFactory baseMapperFactory = new BaseMapperFactory();
-        baseMapperFactory.generate();
-
-        JavaMapperFactory mapperFactory = new JavaMapperFactory();
-        mapperFactory.generate();
-
-        ExtXmlMapperFactory extXmlMapperFactory = new ExtXmlMapperFactory();
-        extXmlMapperFactory.generate();
-
-        BaseRepositoryFactory baseRepositoryFactory = new BaseRepositoryFactory();
-        baseRepositoryFactory.generate();
-
-        JavaRepositoryFactory javaRepositoryFactory = new JavaRepositoryFactory();
-        javaRepositoryFactory.generate();
-
+        String domainPath = StringUtils.package2Path(PlusContext.getDomainPackage());
+        return Constant.JAVA_BASE_PATH.concat(domainPath).concat(domainName).concat(Constant.JAVA_SUFFIX);
     }
 
 }

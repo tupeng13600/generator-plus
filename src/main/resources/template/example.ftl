@@ -1,6 +1,4 @@
-<#if package??>
-package ${package};
-</#if>
+package ${examplePackage};
 
 import java.util.List;
 import java.util.ArrayList;

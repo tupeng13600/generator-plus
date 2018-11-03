@@ -9,11 +9,11 @@ import com.mybatis.plus.util.StringUtils;
 
 import java.util.*;
 
-public class ExampleFactory extends GeneratorFactory {
+public class MapperFactory extends GeneratorFactory {
 
     @Override
     protected String templateName() {
-        return Constant.EXAMPLE_TEMPLATE;
+        return Constant.MAPPER_TEMPLATE;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class ExampleFactory extends GeneratorFactory {
 
     @Override
     protected String desPath(String domainName) {
-        String examplePath = StringUtils.package2Path(PlusContext.getExamplePackage());
-        return Constant.JAVA_BASE_PATH.concat(examplePath).concat(domainName).concat("Example").concat(".java");
+        String examplePath = StringUtils.package2Path(PlusContext.getMapperPackage());
+        return Constant.JAVA_BASE_PATH.concat(examplePath).concat(domainName).concat("Mapper").concat(Constant.JAVA_SUFFIX);
     }
 }

@@ -1,4 +1,4 @@
-package ${package};
+package ${mapperPackage}.base;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

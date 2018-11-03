@@ -1,19 +1,13 @@
-<#if package??>
-package ${package};
-</#if>
+package ${domainPackage};
 
-<#if lombokEnable??>
 import lombok.Data;
-</#if>
 <#if importList??>
 <#list importList as imp>
 import ${imp};
 </#list>
 </#if>
 
-<#if lombokEnable??>
 @Data
-</#if>
 public class ${domain} {
 
 <#if propertyList??>

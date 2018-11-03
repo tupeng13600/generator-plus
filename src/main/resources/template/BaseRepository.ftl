@@ -1,4 +1,4 @@
-package ${package};
+package ${repositoryPackage}.base;
 
 import ${mapperPackage}.base.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;

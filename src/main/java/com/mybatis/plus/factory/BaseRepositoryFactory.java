@@ -1,11 +1,13 @@
 package com.mybatis.plus.factory;
 
+import com.mybatis.plus.constant.Constant;
+import com.mybatis.plus.context.ArgsFactory;
 import com.mybatis.plus.context.PlusContext;
 import com.mybatis.plus.factory.base.GeneratorFactory;
 import com.mybatis.plus.model.PropertyModel;
 import com.mybatis.plus.util.FreeMarkerUtils;
+import com.mybatis.plus.util.StringUtils;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +15,7 @@ public class BaseRepositoryFactory extends GeneratorFactory {
 
     @Override
     protected String templateName() {
-        return "BaseRepository.ftl";
+        return Constant.BASE_REPOSITORY_TEMPLATE;
     }
 
     @Override
@@ -23,16 +25,13 @@ public class BaseRepositoryFactory extends GeneratorFactory {
 
     @Override
     protected String desPath(String domainName) {
-        String prefix = "/src/main/java/";
-        String domainPath = PlusContext.getRepositoryPackage().concat(".base").replaceAll("\\.", "/").concat("/");
-        return prefix.concat(domainPath).concat(domainName).concat(".java");
+        String domainPath = StringUtils.package2Path(PlusContext.getRepositoryPackage().concat(Constant.BASE_PACKAGE));
+        return Constant.JAVA_BASE_PATH.concat(domainPath).concat(domainName).concat(Constant.JAVA_SUFFIX);
     }
 
     @Override
     public void generate() {
-        Map<String, Object> args = new HashMap<>();
-        args.put("package", PlusContext.getRepositoryPackage().concat(".base"));
-        args.put("mapperPackage", PlusContext.getMapperPackage());
+        Map<String, Object> args = ArgsFactory.initArg();
         FreeMarkerUtils.writeFiles(desPath("BaseRepository"), templateName(), args,false);
     }
 }
