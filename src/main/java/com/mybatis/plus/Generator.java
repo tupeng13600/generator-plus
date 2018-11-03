@@ -17,9 +17,13 @@ public class Generator {
     private String password;
 
     private String repositoryPackage;
+
     private String mapperPackage;
+
     private String examplePackage;
+
     private String domainPackage;
+
     private String xmlPackage;
 
     private Generator(){};
@@ -79,6 +83,7 @@ public class Generator {
     }
 
     public void gernerate() {
+        this.validate();
         PlusContext.setDataSource(ip, port, database, user, password);
         PlusContext.setLombokEnable(true);
         DomainFactory.write();
