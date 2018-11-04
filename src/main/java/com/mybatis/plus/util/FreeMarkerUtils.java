@@ -1,8 +1,11 @@
 package com.mybatis.plus.util;
 
 import com.mybatis.plus.Generator;
+import freemarker.cache.ClassTemplateLoader;
+import freemarker.cache.NullCacheStorage;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import freemarker.template.TemplateExceptionHandler;
 
 import java.io.*;
 import java.net.URL;
@@ -10,7 +13,14 @@ import java.util.Map;
 
 public abstract class FreeMarkerUtils {
 
-    private static final String TEMPLATE_PATH = "/template";
+    private static Configuration configuration = new Configuration(Configuration.VERSION_2_3_0);
+
+    static {
+        configuration.setTemplateLoader(new ClassTemplateLoader(FreeMarkerUtils.class, "/template"));
+        configuration.setDefaultEncoding("UTF-8");
+        configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        configuration.setCacheStorage(NullCacheStorage.INSTANCE);
+    }
 
     public static void writeFiles(String filePath, String templateName, Map<String, Object> dataMap, Boolean override) {
 
@@ -19,13 +29,8 @@ public abstract class FreeMarkerUtils {
         if(!override && FileUtil.exist(desPath)) {
             return;
         }
-
-
-        Configuration configuration = new Configuration(Configuration.VERSION_2_3_0);
         Writer out = null;
         try {
-            URL url = FreeMarkerUtils.class.getResource(TEMPLATE_PATH);
-            configuration.setDirectoryForTemplateLoading(new File(url.getFile()));
             Template template = configuration.getTemplate(templateName);
             File desFile = FileUtil.createIfNotExist(desPath);
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(desFile)));
@@ -43,14 +48,14 @@ public abstract class FreeMarkerUtils {
         }
     }
 
-//    public static void main(String[] args) {
-//        Generator.build().ip("127.0.0.1")
-//                .port(3306)
-//                .database("sjs")
-//                .user("root")
-//                .password("Txx@13600")
-//                .repositoryPackage("com.demo.repository")
-//                .gernerate();
-//    }
+    public static void main(String[] args) {
+        Generator.build().ip("127.0.0.1")
+                .port(3306)
+                .database("sjs")
+                .user("root")
+                .password("Txx@13600")
+                .repositoryPackage("com.demo.repository")
+                .gernerate();
+    }
 
 }
