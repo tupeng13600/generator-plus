@@ -58,6 +58,7 @@ public class Generator {
     }
 
     public Generator repositoryPackage(String repositoryPackage){
+        this.repositoryPackage = repositoryPackage;
         PlusContext.setRepositoryPackage(repositoryPackage);
         return this;
     }
