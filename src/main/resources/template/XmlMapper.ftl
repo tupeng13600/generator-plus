@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${mapperPackage}.${domain}Mapper">
+
+    <!--          千万不要尝试修改该文件，该文件为模板基础，若表变更，重新执行Generator即可             -->
+
+
     <resultMap id="BaseMap" type="${domainPackage}.${domain}">
         <#list propertyList as property>
         <#if property.name?? && property.name=='id'>

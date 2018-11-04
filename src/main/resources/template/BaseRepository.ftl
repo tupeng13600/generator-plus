@@ -3,7 +3,11 @@ package ${repositoryPackage}.base;
 import ${mapperPackage}.base.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
-
+/**
+ *
+ * 该文件无需手动修改，若表变更，运行一次Generator即可，会自动刷新
+ *
+ */
 public abstract class BaseRepository<D, U> {
 
     @Autowired

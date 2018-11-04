@@ -7,6 +7,11 @@ import ${imp};
 </#list>
 </#if>
 
+/**
+ *
+ * 该文件无需手动修改，若表变更，运行一次Generator即可，会自动刷新
+ *
+ */
 @Data
 public class ${domain} {
 
