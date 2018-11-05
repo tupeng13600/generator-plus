@@ -116,7 +116,6 @@ public class Generator {
                 .password("Txx@13600")
                 .repositoryPackage("com.demo.repository")
                 .gernerate();
-
     }
 
 
