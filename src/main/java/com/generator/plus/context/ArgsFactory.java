@@ -1,6 +1,6 @@
-package com.mybatis.plus.context;
+package com.generator.plus.context;
 
-import com.mybatis.plus.model.PropertyModel;
+import com.generator.plus.model.PropertyModel;
 
 import java.util.*;
 

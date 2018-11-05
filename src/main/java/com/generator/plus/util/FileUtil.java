@@ -1,4 +1,4 @@
-package com.mybatis.plus.util;
+package com.generator.plus.util;
 
 import java.io.File;
 import java.io.IOException;

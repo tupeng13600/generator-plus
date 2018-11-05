@@ -1,6 +1,6 @@
-package com.mybatis.plus.util;
+package com.generator.plus.util;
 
-import com.mybatis.plus.Generator;
+import com.generator.plus.Generator;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.NullCacheStorage;
 import freemarker.template.Configuration;
@@ -8,7 +8,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 
 import java.io.*;
-import java.net.URL;
 import java.util.Map;
 
 public abstract class FreeMarkerUtils {

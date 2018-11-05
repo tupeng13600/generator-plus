@@ -1,4 +1,4 @@
-package com.mybatis.plus.model;
+package com.generator.plus.model;
 
 public class PropertyModel {
 

@@ -1,4 +1,4 @@
-package com.mybatis.plus.context;
+package com.generator.plus.context;
 
 public class DataSourceConfig {
 

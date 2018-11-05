@@ -1,12 +1,12 @@
-package com.mybatis.plus.factory;
+package com.generator.plus.factory;
 
-import com.mybatis.plus.constant.Constant;
-import com.mybatis.plus.context.ArgsFactory;
-import com.mybatis.plus.context.PlusContext;
-import com.mybatis.plus.factory.base.GeneratorFactory;
-import com.mybatis.plus.model.PropertyModel;
-import com.mybatis.plus.util.FreeMarkerUtils;
-import com.mybatis.plus.util.StringUtils;
+import com.generator.plus.context.ArgsFactory;
+import com.generator.plus.context.PlusContext;
+import com.generator.plus.factory.base.GeneratorFactory;
+import com.generator.plus.model.PropertyModel;
+import com.generator.plus.util.FreeMarkerUtils;
+import com.generator.plus.constant.Constant;
+import com.generator.plus.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;

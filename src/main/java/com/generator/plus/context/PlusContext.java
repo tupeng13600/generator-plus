@@ -1,4 +1,4 @@
-package com.mybatis.plus.context;
+package com.generator.plus.context;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,9 +1,9 @@
-package com.mybatis.plus.util;
+package com.generator.plus.util;
 
-import com.mybatis.plus.context.DataSourceConfig;
-import com.mybatis.plus.context.PlusContext;
-import com.mybatis.plus.handler.TypeHandler;
-import com.mybatis.plus.model.PropertyModel;
+import com.generator.plus.context.DataSourceConfig;
+import com.generator.plus.context.PlusContext;
+import com.generator.plus.handler.TypeHandler;
+import com.generator.plus.model.PropertyModel;
 
 import java.io.Closeable;
 import java.sql.*;

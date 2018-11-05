@@ -1,4 +1,4 @@
-package com.mybatis.plus.handler;
+package com.generator.plus.handler;
 
 import java.math.BigDecimal;
 import java.util.Date;

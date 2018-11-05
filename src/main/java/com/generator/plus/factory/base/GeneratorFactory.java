@@ -1,10 +1,10 @@
-package com.mybatis.plus.factory.base;
+package com.generator.plus.factory.base;
 
-import com.mybatis.plus.context.DataSourceConfig;
-import com.mybatis.plus.context.PlusContext;
-import com.mybatis.plus.model.PropertyModel;
-import com.mybatis.plus.util.FreeMarkerUtils;
-import com.mybatis.plus.util.JDBCUtil;
+import com.generator.plus.context.DataSourceConfig;
+import com.generator.plus.context.PlusContext;
+import com.generator.plus.model.PropertyModel;
+import com.generator.plus.util.FreeMarkerUtils;
+import com.generator.plus.util.JDBCUtil;
 
 import java.util.List;
 import java.util.Map;

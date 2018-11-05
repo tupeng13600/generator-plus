@@ -1,8 +1,8 @@
-package com.mybatis.plus;
+package com.generator.plus;
 
-import com.mybatis.plus.context.PlusContext;
-import com.mybatis.plus.factory.*;
-import com.mybatis.plus.util.StringUtils;
+import com.generator.plus.context.PlusContext;
+import com.generator.plus.factory.*;
+import com.generator.plus.util.StringUtils;
 
 public class Generator {
 

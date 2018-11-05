@@ -1,4 +1,4 @@
-package com.mybatis.plus.constant;
+package com.generator.plus.constant;
 
 public abstract class Constant {
 

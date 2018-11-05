@@ -1,4 +1,4 @@
-package com.mybatis.plus.util;
+package com.generator.plus.util;
 
 public abstract class StringUtils {
 
