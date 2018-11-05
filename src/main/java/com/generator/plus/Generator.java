@@ -83,6 +83,16 @@ public class Generator {
         return this;
     }
 
+    public Generator addTables(String...tableNames){
+        PlusContext.setXmlPackage(xmlPackage);
+        return this;
+    }
+
+    public Generator objectPath(String objectPath){
+        PlusContext.setObjectPath(objectPath);
+        return this;
+    }
+
     public void gernerate() {
         this.validate();
         PlusContext.setDataSource(ip, port, database, user, password);

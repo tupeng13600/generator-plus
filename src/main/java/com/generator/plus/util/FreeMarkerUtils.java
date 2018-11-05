@@ -1,6 +1,7 @@
 package com.generator.plus.util;
 
 import com.generator.plus.Generator;
+import com.generator.plus.context.PlusContext;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.NullCacheStorage;
 import freemarker.template.Configuration;
@@ -21,9 +22,9 @@ public abstract class FreeMarkerUtils {
         configuration.setCacheStorage(NullCacheStorage.INSTANCE);
     }
 
-    public static void writeFiles(String filePath, String templateName, Map<String, Object> dataMap, Boolean override) {
+    public static void writeFiles(String templateName, Map<String, Object> dataMap, Boolean override) {
 
-        String desPath = System.getProperty("user.dir").concat(filePath);
+        String desPath = PlusContext.getDesFilePath();
 
         if(!override && FileUtil.exist(desPath)) {
             return;

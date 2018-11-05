@@ -7,6 +7,7 @@ import com.generator.plus.model.PropertyModel;
 import com.generator.plus.util.FreeMarkerUtils;
 import com.generator.plus.constant.Constant;
 import com.generator.plus.util.StringUtils;
+import com.sun.tools.corba.se.idl.constExpr.Plus;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,8 @@ public class BaseMapperFactory extends GeneratorFactory {
     @Override
     public void generate() {
         Map<String, Object> args = ArgsFactory.initArg();
-        FreeMarkerUtils.writeFiles(desPath(NAME), templateName(), args,false);
+        PlusContext.setDesFilePath(desPath(NAME));
+        FreeMarkerUtils.writeFiles(templateName(), args,false);
     }
 
     public static void write(){

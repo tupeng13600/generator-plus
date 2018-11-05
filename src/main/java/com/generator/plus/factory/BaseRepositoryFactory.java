@@ -34,7 +34,8 @@ public class BaseRepositoryFactory extends GeneratorFactory {
     @Override
     public void generate() {
         Map<String, Object> args = ArgsFactory.initArg();
-        FreeMarkerUtils.writeFiles(desPath(NAME), templateName(), args,false);
+        PlusContext.setDesFilePath(desPath(NAME));
+        FreeMarkerUtils.writeFiles(templateName(), args,false);
     }
 
     public static void write() {

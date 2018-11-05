@@ -54,8 +54,8 @@ public class JDBCUtil implements Closeable {
         return new JDBCUtil();
     }
 
-    private List<String> getTableList() {
-        List<String> resultList = new ArrayList<>();
+    private Set<String> getTableList() {
+        Set<String> resultList = new HashSet<>();
         try {
             statement = connection.createStatement();
             rs = statement.executeQuery(tableNameQuery);
@@ -72,13 +72,13 @@ public class JDBCUtil implements Closeable {
         return resultList;
     }
 
-    public Map<String, List<PropertyModel>> getDomainList(String...tableNames){
+    public Map<String, List<PropertyModel>> getDomainList(Set<String> tableNames){
 
         Map<String, List<PropertyModel>> resultMap = new HashMap<>();
 
-        List<String> tableNameList =
-                (null == tableNames || tableNames.length == 0)
-                ? getTableList() : Arrays.asList(tableNames);
+        Set<String> tableNameList =
+                (null == tableNames || tableNames.isEmpty())
+                ? getTableList() : tableNames;
 
         if(null == tableNameList || tableNameList.isEmpty()) {
             System.out.println("未找到表信息...");
@@ -184,14 +184,5 @@ public class JDBCUtil implements Closeable {
         closeStatement();
         closeConnection();
     }
-
-    public static void main(String[] args) {
-        try(JDBCUtil jdbcUtil = JDBCUtil.build(PlusContext.getDataSource())){
-            Map<String, List<PropertyModel>> tableMap = jdbcUtil.getDomainList();
-            tableMap.forEach((key, value) -> System.out.println(key.concat("  :  ").concat(value.toString())));
-        }
-    }
-
-
 
 }

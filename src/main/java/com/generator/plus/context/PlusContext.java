@@ -1,7 +1,9 @@
 package com.generator.plus.context;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class PlusContext {
 
@@ -20,6 +22,38 @@ public class PlusContext {
     private static String mapperPackage = null;
 
     private static String repositoryPackage = null;
+
+    private static Set<String> tableNames = new HashSet<>();
+
+    private static String objectPath = null;
+
+    private static String desFilePath = null;
+
+    public static String getDesFilePath() {
+        return desFilePath;
+    }
+
+    public static void setDesFilePath(String desFilePath) {
+        PlusContext.desFilePath = getObjectPath().concat(desFilePath);
+        if(System.getProperty("os.name").trim().equals("Windows")) {
+            PlusContext.desFilePath = PlusContext.desFilePath.replaceAll("/", "\\\\");
+        } else {
+            PlusContext.desFilePath = PlusContext.desFilePath.replaceAll("\\\\", "/");
+        }
+    }
+
+    public static void add(String... tableNames) {
+        if(null == tableNames || tableNames.length < 1) {
+            return;
+        }
+        for (String tableName : tableNames) {
+            PlusContext.tableNames.add(tableName);
+        }
+    }
+
+    public static Set<String> getTableNames(){
+        return tableNames;
+    }
 
     public static void add(String domain, String table) {
         tableMap.put(domain, table);
@@ -94,4 +128,23 @@ public class PlusContext {
     public static void setRepositoryPackage(String repositoryPackage) {
         PlusContext.repositoryPackage = repositoryPackage;
     }
+
+    public static String getObjectPath() {
+        return objectPath;
+    }
+
+    public static void setObjectPath(String objectPath) {
+        if(objectPath.endsWith("/") || objectPath.endsWith("\\\\")) {
+            objectPath = objectPath.substring(0, objectPath.length() - 1);
+        }
+
+        if(System.getProperty("os.name").trim().equals("Windows")) {
+            objectPath = objectPath.replaceAll("/", "\\\\");
+        } else {
+            objectPath = objectPath.replaceAll("\\\\", "/");
+        }
+
+        PlusContext.objectPath = objectPath;
+    }
+
 }

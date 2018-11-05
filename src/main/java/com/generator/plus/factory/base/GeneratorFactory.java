@@ -17,7 +17,7 @@ public abstract class GeneratorFactory {
         if (null == domainMap) {
             DataSourceConfig dataSource = PlusContext.getDataSource();
             try (JDBCUtil jdbcUtil = JDBCUtil.build(dataSource)) {
-                domainMap = jdbcUtil.getDomainList();
+                domainMap = jdbcUtil.getDomainList(PlusContext.getTableNames());
             }
         }
     }
@@ -34,7 +34,8 @@ public abstract class GeneratorFactory {
             String templateName = templateName();
             Map<String, Object> templateArgs = templateArgs(domainName, fieldList);
             Boolean override = (Boolean) templateArgs.get("override");
-            FreeMarkerUtils.writeFiles(desPath(domainName), templateName, templateArgs, override == null ? true : override);
+            PlusContext.setDesFilePath(desPath(domainName));
+            FreeMarkerUtils.writeFiles(templateName, templateArgs, override == null ? true : override);
         });
     }
 
