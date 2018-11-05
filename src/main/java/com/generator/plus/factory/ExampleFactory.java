@@ -5,6 +5,7 @@ import com.generator.plus.context.PlusContext;
 import com.generator.plus.factory.base.GeneratorFactory;
 import com.generator.plus.model.PropertyModel;
 import com.generator.plus.constant.Constant;
+import com.generator.plus.util.Log;
 import com.generator.plus.util.StringUtils;
 
 import java.util.*;
@@ -31,5 +32,10 @@ public class ExampleFactory extends GeneratorFactory {
 
     public static void write() {
         new ExampleFactory().generate();
+    }
+
+    @Override
+    protected void afterGenerate(String domain) {
+        Log.info(domain.concat("Example.java"), PlusContext.getDesFilePath());
     }
 }

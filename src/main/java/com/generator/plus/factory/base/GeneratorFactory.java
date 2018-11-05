@@ -36,7 +36,10 @@ public abstract class GeneratorFactory {
             Boolean override = (Boolean) templateArgs.get("override");
             PlusContext.setDesFilePath(desPath(domainName));
             FreeMarkerUtils.writeFiles(templateName, templateArgs, override == null ? true : override);
+            afterGenerate(domainName);
         });
     }
+
+    protected abstract void afterGenerate(String domain);
 
 }

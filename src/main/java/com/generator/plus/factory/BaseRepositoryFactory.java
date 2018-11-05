@@ -6,6 +6,7 @@ import com.generator.plus.factory.base.GeneratorFactory;
 import com.generator.plus.model.PropertyModel;
 import com.generator.plus.util.FreeMarkerUtils;
 import com.generator.plus.constant.Constant;
+import com.generator.plus.util.Log;
 import com.generator.plus.util.StringUtils;
 
 import java.util.List;
@@ -36,9 +37,16 @@ public class BaseRepositoryFactory extends GeneratorFactory {
         Map<String, Object> args = ArgsFactory.initArg();
         PlusContext.setDesFilePath(desPath(NAME));
         FreeMarkerUtils.writeFiles(templateName(), args,false);
+        afterGenerate("");
     }
 
     public static void write() {
         new BaseRepositoryFactory().generate();
+
+    }
+
+    @Override
+    protected void afterGenerate(String domain) {
+        Log.info("BaseRepository.java", PlusContext.getDesFilePath());
     }
 }

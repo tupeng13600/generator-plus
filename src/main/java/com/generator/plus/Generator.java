@@ -84,7 +84,7 @@ public class Generator {
     }
 
     public Generator addTables(String...tableNames){
-        PlusContext.setXmlPackage(xmlPackage);
+        PlusContext.add(tableNames);
         return this;
     }
 
@@ -112,7 +112,6 @@ public class Generator {
                 .port(3306)
                 .database("sjs")
                 .user("root")
-                .addTables("bfc_user")
                 .projectPath("/Users/tutu/IdeaProjects/generator-plus/demo/")
                 .password("Txx@13600")
                 .repositoryPackage("com.demo.repository")
