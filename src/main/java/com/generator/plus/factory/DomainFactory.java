@@ -20,7 +20,7 @@ public class DomainFactory extends GeneratorFactory {
 
     @Override
     protected Map<String, Object> templateArgs(String domainName, List<PropertyModel> propertyList) {
-        return ArgsFactory.initArg(domainName, propertyList);
+        return ArgsFactory.initArg(domainName, propertyList, true);
     }
 
 

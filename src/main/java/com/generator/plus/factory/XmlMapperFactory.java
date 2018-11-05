@@ -21,7 +21,7 @@ public class XmlMapperFactory extends GeneratorFactory {
 
     @Override
     protected Map<String, Object> templateArgs(String domainName, List<PropertyModel> propertyList) {
-        Map<String, Object> args = ArgsFactory.initArg(domainName, propertyList);
+        Map<String, Object> args = ArgsFactory.initArg(domainName, propertyList, true);
         args.put("tableName", PlusContext.getTable(domainName));
         return args;
     }

@@ -16,12 +16,13 @@ public abstract class ArgsFactory {
         return args;
     }
 
-    public static Map<String, Object> initArg(String domainName, List<PropertyModel> propertyList){
+    public static Map<String, Object> initArg(String domainName, List<PropertyModel> propertyList, Boolean override){
         Map<String, Object> args = new HashMap<>();
         args.put("examplePackage", PlusContext.getExamplePackage());
         args.put("domainPackage", PlusContext.getDomainPackage());
         args.put("mapperPackage", PlusContext.getMapperPackage());
         args.put("repositoryPackage", PlusContext.getRepositoryPackage());
+        args.put("override", override);
         args.put("lombokEnable", true);
 
         Set<String> importList = new HashSet<>();

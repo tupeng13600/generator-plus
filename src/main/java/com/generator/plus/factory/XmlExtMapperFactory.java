@@ -21,7 +21,7 @@ public class XmlExtMapperFactory extends GeneratorFactory {
 
     @Override
     protected Map<String, Object> templateArgs(String domainName, List<PropertyModel> propertyList) {
-        return ArgsFactory.initArg(domainName, propertyList);
+        return ArgsFactory.initArg(domainName, propertyList, false);
     }
 
     @Override
