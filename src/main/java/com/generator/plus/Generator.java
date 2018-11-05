@@ -88,8 +88,8 @@ public class Generator {
         return this;
     }
 
-    public Generator objectPath(String objectPath){
-        PlusContext.setObjectPath(objectPath);
+    public Generator projectPath(String projectPath){
+        PlusContext.setProjectPath(projectPath);
         return this;
     }
 
@@ -106,6 +106,20 @@ public class Generator {
         XmlExtMapperFactory.write();
         XmlMapperFactory.write();
     }
+
+    public static void main(String[] args) {
+        Generator.build().ip("127.0.0.1")
+                .port(3306)
+                .database("sjs")
+                .user("root")
+                .addTables("bfc_user")
+                .projectPath("/Users/tutu/IdeaProjects/generator-plus/demo/")
+                .password("Txx@13600")
+                .repositoryPackage("com.demo.repository")
+                .gernerate();
+
+    }
+
 
     private void validate(){
         if(StringUtils.isBlank(ip)) {

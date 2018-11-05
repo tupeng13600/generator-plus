@@ -25,7 +25,7 @@ public class PlusContext {
 
     private static Set<String> tableNames = new HashSet<>();
 
-    private static String objectPath = null;
+    private static String projectPath = null;
 
     private static String desFilePath = null;
 
@@ -34,7 +34,7 @@ public class PlusContext {
     }
 
     public static void setDesFilePath(String desFilePath) {
-        PlusContext.desFilePath = getObjectPath().concat(desFilePath);
+        PlusContext.desFilePath = getProjectPath().concat(desFilePath);
         if(System.getProperty("os.name").trim().equals("Windows")) {
             PlusContext.desFilePath = PlusContext.desFilePath.replaceAll("/", "\\\\");
         } else {
@@ -129,22 +129,22 @@ public class PlusContext {
         PlusContext.repositoryPackage = repositoryPackage;
     }
 
-    public static String getObjectPath() {
-        return objectPath;
+    public static String getProjectPath() {
+        return (projectPath == null || "".equals(projectPath.trim())) ? System.getProperty("user.dir") : projectPath;
     }
 
-    public static void setObjectPath(String objectPath) {
-        if(objectPath.endsWith("/") || objectPath.endsWith("\\\\")) {
-            objectPath = objectPath.substring(0, objectPath.length() - 1);
+    public static void setProjectPath(String projectPath) {
+        if(projectPath.endsWith("/") || projectPath.endsWith("\\\\")) {
+            projectPath = projectPath.substring(0, projectPath.length() - 1);
         }
 
         if(System.getProperty("os.name").trim().equals("Windows")) {
-            objectPath = objectPath.replaceAll("/", "\\\\");
+            projectPath = projectPath.replaceAll("/", "\\\\");
         } else {
-            objectPath = objectPath.replaceAll("\\\\", "/");
+            projectPath = projectPath.replaceAll("\\\\", "/");
         }
 
-        PlusContext.objectPath = objectPath;
+        PlusContext.projectPath = projectPath;
     }
 
 }
