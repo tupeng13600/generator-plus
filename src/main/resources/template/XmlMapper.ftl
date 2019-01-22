@@ -27,20 +27,21 @@
             </isNotNull>
             <include refid="allFieldMap" />
             FROM ${tableName} WHERE 1=1
-            <isNotNull property="_parameter">
-                <![CDATA[ $ConditionSql$ ]]>
-                <isNotNull  property="orderByClause">
-                    ORDER BY <![CDATA[ $orderByClause$ ]]>
-                </isNotNull>
-                <isNotNull  property="limit">
-                    <isNotNull  property="offset">
-                        LIMIT #offset#, #limit#
-                    </isNotNull>
-                    <isNull property="offset">
-                        LIMIT #limit#
-                    </isNull>
-                </isNotNull>
+            <isNotNull property="ConditionSql">
+                <![CDATA[ $conditionSql$ ]]>
             </isNotNull>
+            <isNotNull  property="orderByClause">
+                ORDER BY <![CDATA[ $orderByClause$ ]]>
+            </isNotNull>
+            <isNotNull  property="limit">
+                <isNotNull  property="offset">
+                    LIMIT #offset#, #limit#
+                </isNotNull>
+                <isNull property="offset">
+                    LIMIT #limit#
+                </isNull>
+            </isNotNull>
+
         </dynamic>
     </select>
 
@@ -81,8 +82,8 @@
         <dynamic>
             COUNT(1) FROM ${tableName}
             FROM ${tableName} WHERE 1=1
-            <isNotNull property="_parameter">
-                <![CDATA[ $ConditionSql$ ]]>
+            <isNotNull property="conditionSql">
+                <![CDATA[ $conditionSql$ ]]>
             </isNotNull>
         </dynamic>
     </select>
@@ -90,7 +91,7 @@
     <update id="updateById" parameterClass="${domainPackage}.${domain}">
         update ${tableName}
         <#list propertyList as property>
-        set ${property.columnName} = ${r'#record.'}${property.name}${r'#'}<#if property_has_next>,</#if>
+        set ${property.columnName} = ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
         </#list>
         where id = #id#
     </update>

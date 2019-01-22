@@ -100,13 +100,14 @@ public class Generator {
     }
 
     public static void main(String[] args) {
-        Generator.build().ip("127.0.0.1")
+        Generator.build().ip("10.101.23.101")
                 .port(3306)
-                .database("sjs")
-                .user("root")
+                .database("ucar_cto")
+                .user("ctoserver_w")
                 .projectPath("/Users/tutu/IdeaProjects/MMCMAMS/mmcmams-service")
-                .password("Txx@13600")
+                .password("iBKEYMQBcPhiE6Yz")
                 .repositoryPackage("com.uc.mmcmams.repository")
+                .addTables("demo_mess")
                 .gernerate();
     }
 

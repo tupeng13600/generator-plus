@@ -203,7 +203,7 @@ public class ${domain}Example implements Serializable {
         }
 
         <#if property.typeName=="String">
-        public Criteria andC${property.methodPropertyName}NotLike(String value) {
+        public Criteria and${property.methodPropertyName}NotLike(String value) {
             addCriterion("${property.columnName} not like", value, "${property.name}");
             return (Criteria) this;
         }
@@ -309,31 +309,33 @@ public class ${domain}Example implements Serializable {
 
     public String getConditionSql(){
         StringBuilder builder = new StringBuilder();
-        if(null != oredCriteria && oredCriteria.size() > 0) {
-            for (Criteria critia : oredCriteria) {
-                if(null != critia && critia.isValid() && !critia.criteria.isEmpty()) {
-                    for (Criterion criterion : critia.criteria) {
-                        builder.append(AND).append(criterion.condition).append(BLANK);
-                        if(criterion.noValue) {
-                            //空值，无需处理
-                        } else if(criterion.singleValue) {
-                            builder.append(criterion.value).append(BLANK);
-                        } else if(criterion.betweenValue) {
-                            builder.append(criterion.value)
-                                    .append(AND)
-                                    .append(criterion.secondValue).append(BLANK);
-                        } else if(criterion.listValue) {
-                            builder.append("(").append(BLANK);
-                            if(criterion.value instanceof Collection) {
-                                Iterator iterator = ((Collection) criterion.value).iterator();
-                                while (iterator.hasNext()) {
-                                    Object val = iterator.next();
-                                    builder.append(val.toString());
+            if(null != oredCriteria && oredCriteria.size() > 0) {
+                for (Criteria critia : oredCriteria) {
+                    if(null != critia && critia.isValid() && !critia.criteria.isEmpty()) {
+                        for (Criterion criterion : critia.criteria) {
+                            builder.append(AND).append(criterion.condition).append(BLANK);
+                            if(criterion.noValue) {
+                                //空值，无需处理
+                            } else if(criterion.singleValue) {
+                                builder.append(handlerVal(criterion.value)).append(BLANK);
+                            } else if(criterion.betweenValue) {
+                                builder.append(handlerVal(criterion.value))
+                                        .append(AND)
+                                        .append(handlerVal(criterion.secondValue)).append(BLANK);
+                            } else if(criterion.listValue) {
+                                if(criterion.value instanceof Collection) {
+                                    Iterator iterator = ((Collection) criterion.value).iterator();
                                     if(iterator.hasNext()) {
-                                        builder.append(", ");
+                                        builder.append("(").append(BLANK);
+                                        while (iterator.hasNext()) {
+                                            Object val = iterator.next();
+                                            builder.append(handlerVal(val.toString()));
+                                            if(iterator.hasNext()) {
+                                                builder.append(", ");
+                                            }
+                                        }
+                                    builder.append(") ");
                                     }
-                                }
-                                builder.append(") ");
                             } else {
                                 throw new RuntimeException("Error Type of argument");
                             }
@@ -341,8 +343,19 @@ public class ${domain}Example implements Serializable {
                     }
                 }
             }
-         }
+        }
         return builder.toString();
+    }
+
+    private Object handlerVal(Object val) {
+        if(val instanceof String) {
+            return "'".concat(val.toString()).concat("'");
+        }
+        if(val instanceof Date) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                return "'".concat(format.format(val)).concat("'");
+        }
+        return val;
     }
 
 
