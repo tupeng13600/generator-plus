@@ -12,7 +12,7 @@ import java.util.*;
 
 public class XmlExtMapperFactory extends GeneratorFactory {
 
-    private static String SUFFIX = "ExtMapper";
+    private static String SUFFIX = "ExtMapper_sql";
 
     @Override
     protected String templateName() {

@@ -112,7 +112,7 @@ public class Generator {
                 .port(3306)
                 .database("sjs")
                 .user("root")
-                .projectPath("/Users/tutu/IdeaProjects/generator-plus/demo/")
+                .projectPath("/Users/tutu/IdeaProjects/generator-plus/")
                 .password("Txx@13600")
                 .repositoryPackage("com.demo.repository")
                 .gernerate();

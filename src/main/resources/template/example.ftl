@@ -2,6 +2,8 @@ package ${examplePackage};
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.*;
 <#if importList??>
 <#list importList as imp>
 import ${imp};
@@ -13,7 +15,11 @@ import ${imp};
  * 该文件无需手动修改，若表变更，运行一次Generator即可，会自动刷新
  *
  */
-public class ${domain}Example {
+public class ${domain}Example implements Serializable {
+
+    private static final String AND = " AND ";
+
+    private static final String BLANK = " ";
 
     protected String orderByClause;
 
@@ -300,4 +306,44 @@ public class ${domain}Example {
             this(condition, value, secondValue, null);
         }
     }
+
+    public String getConditionSql(){
+        StringBuilder builder = new StringBuilder();
+        if(null != oredCriteria && oredCriteria.size() > 0) {
+            for (Criteria critia : oredCriteria) {
+                if(null != critia && critia.isValid() && !critia.criteria.isEmpty()) {
+                    for (Criterion criterion : critia.criteria) {
+                        builder.append(AND).append(criterion.condition).append(BLANK);
+                        if(criterion.noValue) {
+                            //空值，无需处理
+                        } else if(criterion.singleValue) {
+                            builder.append(criterion.value).append(BLANK);
+                        } else if(criterion.betweenValue) {
+                            builder.append(criterion.value)
+                                    .append(AND)
+                                    .append(criterion.secondValue).append(BLANK);
+                        } else if(criterion.listValue) {
+                            builder.append("(").append(BLANK);
+                            if(criterion.value instanceof Collection) {
+                                Iterator iterator = ((Collection) criterion.value).iterator();
+                                while (iterator.hasNext()) {
+                                    Object val = iterator.next();
+                                    builder.append(val.toString());
+                                    if(iterator.hasNext()) {
+                                        builder.append(", ");
+                                    }
+                                }
+                                builder.append(") ");
+                            } else {
+                                throw new RuntimeException("Error Type of argument");
+                            }
+                        }
+                    }
+                }
+            }
+         }
+        return builder.toString();
+    }
+
+
 }

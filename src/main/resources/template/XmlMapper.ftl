@@ -1,154 +1,98 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${mapperPackage}.${domain}Mapper">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="${domain}Mapper">
 
     <!--          千万不要尝试修改该文件，该文件为模板基础，若表变更，重新执行Generator即可             -->
-
-
-    <resultMap id="BaseMap" type="${domainPackage}.${domain}">
+    <sql id="allFieldMap">
         <#list propertyList as property>
-        <#if property.name?? && property.name=='id'>
-        <id column="id" property="id" />
-        <#else >
-        <result column="${property.columnName}" property="${property.name}" />
+        <#if property_has_next>
+            ${property.columnName} AS ${property.name},
+        <#else>
+            ${property.columnName} AS ${property.name}
         </#if>
         </#list>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${r'${'}criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${r'${'}criterion.condition} ${r'#{'}criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${r'${'}criterion.condition} ${r'#{'}criterion.value} and ${r'#{'}criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${r'${'}criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                                    ${r'#{'}listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
     </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${r'${'}criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${r'${'}criterion.condition} ${r'#{'}criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${r'${'}criterion.condition} ${r'#{'}criterion.value} and ${r'#{'}criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${r'${'}criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                                    ${r'#{'}listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="BaseSql">
+
+    <sql id="AllFields">
         <#list propertyList as property>
             ${property.columnName}<#if property_has_next>,</#if>
         </#list>
     </sql>
-    <select id="getByExample" parameterType="${examplePackage}.${domain}Example" resultMap="BaseMap">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="BaseSql" />
-        from ${tableName}
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
-        </if>
-        <if test="orderByClause != null">
-            order by ${r'${'}orderByClause}
-        </if>
-        <if test="limit != null">
-            <if test="offset != null">
-                limit ${r'${'}offset}, ${r'${'}limit}
-            </if>
-            <if test="offset == null">
-                limit ${r'${'}limit}
-            </if>
-        </if>
-    </select>
-    <select id="getById" resultMap="BaseMap">
-        select
-        <include refid="BaseSql" />
-        from ${tableName}
-        where id = ${r'#{'}id}
+
+    <select id="getByExample" parameterClass="${examplePackage}.${domain}Example" resultClass="${domainPackage}.${domain}">
+        SELECT
+        <dynamic>
+            <isNotNull property="distinct">
+                DISTINCT
+            </isNotNull>
+            <include refid="allFieldMap" />
+            FROM ${tableName} WHERE 1=1
+            <isNotNull property="_parameter">
+                <![CDATA[ $ConditionSql$ ]]>
+                <isNotNull  property="orderByClause">
+                    ORDER BY <![CDATA[ $orderByClause$ ]]>
+                </isNotNull>
+                <isNotNull  property="limit">
+                    <isNotNull  property="offset">
+                        LIMIT #offset#, #limit#
+                    </isNotNull>
+                    <isNull property="offset">
+                        LIMIT #limit#
+                    </isNull>
+                </isNotNull>
+            </isNotNull>
+        </dynamic>
     </select>
 
-    <insert id="insert" parameterType="${domainPackage}.${domain}" useGeneratedKeys="true" keyProperty="id">
-        insert into system_wallet (<include refid="BaseSql"/>)
+    <select id="getById" parameterClass="java.lang.Long" resultClass="${domainPackage}.${domain}">
+        SELECT
+        <dynamic>
+            <include refid="allFieldMap" />
+            FROM ${tableName} WHERE id = #id#
+        </dynamic>
+    </select>
+
+    <insert id="insert" parameterClass="${domainPackage}.${domain}" resultClass="java.lang.Integer">
+        insert into ${tableName} (<include refid="AllFields"/>)
         values (
         <#list propertyList as property>
-        ${r'#{'}${property.name}}<#if property_has_next>,</#if>
+        ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
         </#list>
         )
+        <selectKey resultClass="long" keyProperty="id">
+            select LASt_INSERT_ID() AS id
+        </selectKey>
     </insert>
 
-    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
-        insert into system_wallet (<include refid="BaseSql"/>)
-        values
-        <foreach collection="list" item="record" separator=",">
-        (
-        <#list propertyList as property>
-            ${r'#{record.'}${property.name}}<#if property_has_next>,</#if>
-        </#list>
-        )
-        </foreach>
+    <insert id="insertBatch" parameterClass="java.util.Map">
+        INSERT INTO ${tableName} (<include refid="AllFields"/>)
+        VALUES
+        <iterate property="list" conjunction=",">
+            (
+            <#list propertyList as property>
+                ${r'#'}list[].${property.name}${r'#'}<#if property_has_next>,</#if>
+            </#list>
+            )
+        </iterate>
     </insert>
 
-    <select id="countByExample" parameterType="${examplePackage}.${domain}Example" resultType="java.lang.Long">
-        select count(1) from ${tableName}
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
-        </if>
+    <select id="countByExample" parameterClass="${examplePackage}.${domain}Example" resultClass="java.lang.Long">
+        SELECT
+        <dynamic>
+            COUNT(1) FROM ${tableName}
+            FROM ${tableName} WHERE 1=1
+            <isNotNull property="_parameter">
+                <![CDATA[ $ConditionSql$ ]]>
+            </isNotNull>
+        </dynamic>
     </select>
 
-    <update id="updateByExample" parameterType="map">
+    <update id="updateById" parameterClass="${domainPackage}.${domain}" resultClass="java.lang.Integer">
         update ${tableName}
         <#list propertyList as property>
-        set ${property.columnName} = ${r'#{record.'}${property.name}${r'}'}<#if property_has_next>,</#if>
+        set ${property.columnName} = ${r'#record.'}${property.name}${r'#'}<#if property_has_next>,</#if>
         </#list>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause" />
-        </if>
+        where id = #id#
     </update>
 
-    <update id="updateById">
-        update ${tableName}
-        <#list propertyList as property>
-        set ${property.columnName} = ${r'#{record.'}${property.name}${r'}'}<#if property_has_next>,</#if>
-        </#list>
-        where id = ${r'#{id}'}
-    </update>
-</mapper>
+</sqlMap>
