@@ -52,7 +52,7 @@
         </dynamic>
     </select>
 
-    <insert id="insert" parameterClass="${domainPackage}.${domain}" resultClass="java.lang.Integer">
+    <insert id="insert" parameterClass="${domainPackage}.${domain}">
         insert into ${tableName} (<include refid="AllFields"/>)
         values (
         <#list propertyList as property>
@@ -87,12 +87,16 @@
         </dynamic>
     </select>
 
-    <update id="updateById" parameterClass="${domainPackage}.${domain}" resultClass="java.lang.Integer">
+    <update id="updateById" parameterClass="${domainPackage}.${domain}">
         update ${tableName}
         <#list propertyList as property>
         set ${property.columnName} = ${r'#record.'}${property.name}${r'#'}<#if property_has_next>,</#if>
         </#list>
         where id = #id#
     </update>
+
+    <delete id="deleteById" parameterClass="java.lang.Long">
+        DELETE FROM ${tableName} WHERE id = #id#;
+    </delete>
 
 </sqlMap>

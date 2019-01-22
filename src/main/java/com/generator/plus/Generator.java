@@ -18,14 +18,6 @@ public class Generator {
 
     private String repositoryPackage;
 
-    private String mapperPackage;
-
-    private String examplePackage;
-
-    private String domainPackage;
-
-    private String xmlPackage;
-
     private Generator(){};
 
     public static Generator build(){
@@ -112,9 +104,9 @@ public class Generator {
                 .port(3306)
                 .database("sjs")
                 .user("root")
-                .projectPath("/Users/tutu/IdeaProjects/generator-plus/")
+                .projectPath("/Users/tutu/IdeaProjects/MMCMAMS/mmcmams-service")
                 .password("Txx@13600")
-                .repositoryPackage("com.demo.repository")
+                .repositoryPackage("com.uc.mmcmams.repository")
                 .gernerate();
     }
 

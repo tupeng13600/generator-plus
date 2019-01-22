@@ -21,7 +21,7 @@ public abstract class BaseRepository<D, E> {
         return mapper.insertBatch(list);
     }
 
-    public D getById(Integer id) {
+    public D getById(Long id) {
         return mapper.getById(id);
     }
 
@@ -35,6 +35,10 @@ public abstract class BaseRepository<D, E> {
 
     public Long countByExample(E example){
         return mapper.countByExample(example);
+    }
+
+    public Integer deleteById(Long id){
+        return mapper.deleteById(id);
     }
 
 }

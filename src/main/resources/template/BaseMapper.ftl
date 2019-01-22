@@ -39,21 +39,21 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
     }
 
     public List<D> getByExample(E example){
-        return super.queryForList(mapperNamespace.concat(".getByExample"), example);
+        return (List<D>) super.queryForList(mapperNamespace.concat(".getByExample"), example);
     }
 
     public D getById(Long id){
-        return super.queryForObject(mapperNamespace.concat(".getById"), id);
+        return (D) super.queryForObject(mapperNamespace.concat(".getById"), id);
     }
 
     public Integer insert(D domain){
-        return super.insert(mapperNamespace.concat(".insert"), domain)
+        return (Integer) super.insert(mapperNamespace.concat(".insert"), domain);
     }
 
-    public void insertBatch(List<D> list){
+    public Integer insertBatch(List<D> list){
         Map<${r'String'},List<D>> insertMap = new HashMap<>();
-        insertMap.put("list", list)
-        return super.insert(mapperNamespace.concat(".insertBatch"), insertMap)
+        insertMap.put("list", list);
+        return (Integer)super.insert(mapperNamespace.concat(".insertBatch"), insertMap);
     }
 
     public Long countByExample(E example){
@@ -62,6 +62,10 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
 
     public Integer updateById(D domain){
         return (Integer)queryForObject(mapperNamespace.concat(".updateById"), domain);
+    }
+
+    public Integer deleteById(Long id){
+        return (Integer)queryForObject(mapperNamespace.concat(".deleteById"), id);
     }
 
 }
