@@ -1,9 +1,6 @@
 package com.generator.plus.context;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class PlusContext {
 
@@ -15,7 +12,7 @@ public class PlusContext {
 
     private static String examplePackage = null;
 
-    private static Boolean lombokEnable = true;
+    private static Boolean lombokEnable = false;
 
     private static String xmlPackage = null;
 
@@ -46,9 +43,7 @@ public class PlusContext {
         if(null == tableNames || tableNames.length < 1) {
             return;
         }
-        for (String tableName : tableNames) {
-            PlusContext.tableNames.add(tableName);
-        }
+        PlusContext.tableNames.addAll(Arrays.asList(tableNames));
     }
 
     public static Set<String> getTableNames(){
@@ -89,7 +84,7 @@ public class PlusContext {
 
     public static void setLombokEnable(Boolean lombokEnable) {
         if(null == lombokEnable) {
-            PlusContext.lombokEnable = true;
+            PlusContext.lombokEnable = false;
         } else {
             PlusContext.lombokEnable = lombokEnable;
         }

@@ -112,7 +112,7 @@ public class Generator {
                 .projectPath("/Users/tutu/IdeaProjects/generator-plus/")
                 .repositoryPackage("com.uc.mmcmams.repository")
                 .addTables("demo_mess")
-                .lombokEnable(false)
+                .lombokEnable(true)
                 .gernerate();
     }
 
