@@ -1,6 +1,5 @@
 package com.generator.plus.util;
 
-import com.generator.plus.Generator;
 import com.generator.plus.context.PlusContext;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.NullCacheStorage;
@@ -26,7 +25,7 @@ public abstract class FreeMarkerUtils {
 
         String desPath = PlusContext.getDesFilePath();
 
-        if(!override && FileUtil.exist(desPath)) {
+        if (!override && FileUtil.exist(desPath)) {
             return;
         }
         Writer out = null;
@@ -47,15 +46,4 @@ public abstract class FreeMarkerUtils {
             }
         }
     }
-
-    public static void main(String[] args) {
-        Generator.build().ip("127.0.0.1")
-                .port(3306)
-                .database("sjs")
-                .user("root")
-                .password("Txx@13600")
-                .repositoryPackage("com.demo.repository")
-                .gernerate();
-    }
-
 }
