@@ -46,7 +46,7 @@ public class JDBCUtil implements Closeable {
         JDBCUtil.columnQueryPrifx = "select column_name columnName,column_comment AS description,data_type AS dataType from information_schema.columns where table_schema='"
                 .concat(config.getDatabasename()).concat("'");
     try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(JDBCUtil.url, JDBCUtil.username, JDBCUtil.password);
         } catch (Exception e) {
             e.printStackTrace();

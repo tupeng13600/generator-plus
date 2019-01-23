@@ -15,7 +15,7 @@ public class PlusContext {
 
     private static String examplePackage = null;
 
-    private static Boolean lombokEnable = false;
+    private static Boolean lombokEnable = true;
 
     private static String xmlPackage = null;
 
@@ -88,7 +88,11 @@ public class PlusContext {
     }
 
     public static void setLombokEnable(Boolean lombokEnable) {
-        PlusContext.lombokEnable = lombokEnable;
+        if(null == lombokEnable) {
+            PlusContext.lombokEnable = true;
+        } else {
+            PlusContext.lombokEnable = lombokEnable;
+        }
     }
 
     public static String getExamplePackage() {

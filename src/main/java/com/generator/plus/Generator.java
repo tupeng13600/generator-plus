@@ -55,6 +55,11 @@ public class Generator {
         return this;
     }
 
+    public Generator lombokEnable(Boolean lombokEnable) {
+        PlusContext.setLombokEnable(lombokEnable);
+        return this;
+    }
+
     public Generator mapperPackage(String mapperPackage){
         PlusContext.setMapperPackage(mapperPackage);
         return this;
@@ -88,7 +93,6 @@ public class Generator {
     public void gernerate() {
         this.validate();
         PlusContext.setDataSource(ip, port, database, user, password);
-        PlusContext.setLombokEnable(true);
         DomainFactory.write();
         BaseMapperFactory.write();
         BaseRepositoryFactory.write();
@@ -99,17 +103,18 @@ public class Generator {
         XmlMapperFactory.write();
     }
 
-//    public static void main(String[] args) {
-//        Generator.build().ip("10.101.23.101")
-//                .port(3306)
-//                .database("ucar_cto")
-//                .user("ctoserver_w")
-//                .projectPath("/Users/tutu/IdeaProjects/MMCMAMS/mmcmams-service")
-//                .password("iBKEYMQBcPhiE6Yz")
-//                .repositoryPackage("com.uc.mmcmams.repository")
-//                .addTables("demo_mess")
-//                .gernerate();
-//    }
+    public static void main(String[] args) {
+        Generator.build().ip("10.101.23.101")
+                .port(3306)
+                .database("ucar_cto")
+                .user("ctoserver_w")
+                .password("iBKEYMQBcPhiE6Yz")
+                .projectPath("/Users/tutu/IdeaProjects/generator-plus/")
+                .repositoryPackage("com.uc.mmcmams.repository")
+                .addTables("demo_mess")
+                .lombokEnable(false)
+                .gernerate();
+    }
 
 
     private void validate(){

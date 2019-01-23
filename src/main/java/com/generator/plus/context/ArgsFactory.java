@@ -12,7 +12,7 @@ public abstract class ArgsFactory {
         args.put("domainPackage", PlusContext.getDomainPackage());
         args.put("mapperPackage", PlusContext.getMapperPackage());
         args.put("repositoryPackage", PlusContext.getRepositoryPackage());
-        args.put("lombokEnable", true);
+        args.put("lombokEnable", PlusContext.getLombokEnable());
         return args;
     }
 
@@ -23,7 +23,7 @@ public abstract class ArgsFactory {
         args.put("mapperPackage", PlusContext.getMapperPackage());
         args.put("repositoryPackage", PlusContext.getRepositoryPackage());
         args.put("override", override);
-        args.put("lombokEnable", true);
+        args.put("lombokEnable", PlusContext.getLombokEnable());
 
         Set<String> importList = new HashSet<>();
         for (PropertyModel property : propertyList) {
