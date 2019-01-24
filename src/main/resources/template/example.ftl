@@ -22,6 +22,8 @@ public class ${domain}Example implements Serializable {
 
     private static final String BLANK = " ";
 
+    private String conditionSql;
+
     protected String orderByClause;
 
     protected boolean distinct;
