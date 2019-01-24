@@ -65,7 +65,7 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
     }
 
     public Integer deleteById(Long id){
-        return (Integer)queryForObject(mapperNamespace.concat(".deleteById"), id);
+        return deleteObject(mapperNamespace.concat(".deleteById"), id);
     }
 
 }
