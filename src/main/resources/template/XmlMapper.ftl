@@ -27,7 +27,7 @@
             </isNotNull>
             <include refid="allFieldMap" />
             FROM ${tableName} WHERE 1=1
-            <isNotNull property="ConditionSql">
+            <isNotNull property="conditionSql">
                 <![CDATA[ $conditionSql$ ]]>
             </isNotNull>
             <isNotNull  property="orderByClause">
