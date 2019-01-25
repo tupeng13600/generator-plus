@@ -10,35 +10,34 @@ import java.util.List;
  */
 public abstract class BaseRepository<D, E> {
 
-    @Autowired
-    protected BaseMapper<D, E> mapper;
-
     public Integer insert(D domain) {
-        return mapper.insert(domain);
+        return getMapper().insert(domain);
     }
 
     public Integer insertBatch(List<D> list) {
-        return mapper.insertBatch(list);
+        return getMapper().insertBatch(list);
     }
 
     public D getById(Long id) {
-        return mapper.getById(id);
+        return getMapper().getById(id);
     }
 
     public Integer updateById(D domain) {
-        return mapper.updateById(domain);
+        return getMapper().updateById(domain);
     }
 
     public List<D> getByExample(E example){
-        return mapper.getByExample(example);
+        return getMapper().getByExample(example);
     }
 
     public Long countByExample(E example){
-        return mapper.countByExample(example);
+        return getMapper().countByExample(example);
     }
 
     public Integer deleteById(Long id){
-        return mapper.deleteById(id);
+        return getMapper().deleteById(id);
     }
+
+    protected abstract BaseMapper<D, E> getMapper();
 
 }

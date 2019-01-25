@@ -14,6 +14,8 @@ public abstract class Constant {
 
     public static final String REPOSITORY_TEMPLATE = "Repositoryjava.ftl";
 
+    public static final String CORRECT_BASE_REPOSITORY_TEMPLATE = "CorrectBaseRepository.ftl";
+
     public static final String EXT_XML_TEMPLATE = "XmlExtMapper.ftl";
 
     public static final String XML_TEMPLATE = "XmlMapper.ftl";

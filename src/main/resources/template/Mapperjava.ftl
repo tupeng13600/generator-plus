@@ -3,9 +3,6 @@ package ${mapperPackage};
 import ${domainPackage}.${domain};
 import ${examplePackage}.${domain}Example;
 import ${mapperPackage}.base.BaseMapper;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,10 +13,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ${domain}Mapper extends BaseMapper<${domain}, ${domain}Example> {
 
+    /** 这部分代码为自动生成代码, 一般情况无需修改 **/
+
     private static final String EXTRA_MAPPER = "${domain}ExtMapper"; //自定义SQL时使用该namespace
 
+    private static final String DEFAULT_NAMESPACE = "${domain}Mapper";
+
     public ${domain}Mapper(){
-        super("${domain}Mapper");
+        super(DEFAULT_NAMESPACE);
     }
+
+    /** 这部分代码为自动生成代码, 一般情况无需修改 **/
 
 }

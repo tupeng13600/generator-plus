@@ -96,6 +96,7 @@ public class Generator {
         DomainFactory.write();
         BaseMapperFactory.write();
         BaseRepositoryFactory.write();
+        CorrectRepositoryBaseFactory.write();
         MapperFactory.write();
         ExampleFactory.write();
         RepositoryFactory.write();
@@ -109,10 +110,9 @@ public class Generator {
                 .database("ucar_cto")
                 .user("ctoserver_w")
                 .password("iBKEYMQBcPhiE6Yz")
-                .projectPath("/Users/tutu/IdeaProjects/generator-plus/")
+                .projectPath("/Users/tutu/IdeaProjects/MMCMAMS/mmcmams-service")
                 .repositoryPackage("com.uc.mmcmams.repository")
                 .addTables("demo_mess")
-                .lombokEnable(true)
                 .gernerate();
     }
 
