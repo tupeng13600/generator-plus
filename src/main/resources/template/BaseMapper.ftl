@@ -39,33 +39,33 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
     }
 
     public List<D> getByExample(E example){
-        return (List<D>) super.queryForList(mapperNamespace.concat(".getByExample"), example);
+        return (List<D>) super.queryForList(mapperNamespace.concat("getByExample"), example);
     }
 
     public D getById(Long id){
-        return (D) super.queryForObject(mapperNamespace.concat(".getById"), id);
+        return (D) super.queryForObject(mapperNamespace.concat("getById"), id);
     }
 
     public Integer insert(D domain){
-        return (Integer) super.insert(mapperNamespace.concat(".insert"), domain);
+        return (Integer) super.insert(mapperNamespace.concat("insert"), domain);
     }
 
     public Integer insertBatch(List<D> list){
         Map<${r'String'},List<D>> insertMap = new HashMap<>();
         insertMap.put("list", list);
-        return (Integer)super.insert(mapperNamespace.concat(".insertBatch"), insertMap);
+        return (Integer)super.insert(mapperNamespace.concat("insertBatch"), insertMap);
     }
 
     public Long countByExample(E example){
-        return (Long)queryForObject(mapperNamespace.concat(".countByExample"), example);
+        return (Long)queryForObject(mapperNamespace.concat("countByExample"), example);
     }
 
     public Integer updateById(D domain){
-        return (Integer)queryForObject(mapperNamespace.concat(".updateById"), domain);
+        return (Integer)queryForObject(mapperNamespace.concat("updateById"), domain);
     }
 
     public Integer deleteById(Long id){
-        return deleteObject(mapperNamespace.concat(".deleteById"), id);
+        return deleteObject(mapperNamespace.concat("deleteById"), id);
     }
 
 }

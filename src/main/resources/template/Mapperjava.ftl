@@ -15,9 +15,9 @@ public class ${domain}Mapper extends BaseMapper<${domain}, ${domain}Example> {
 
     /** 这部分代码为自动生成代码, 一般情况无需修改 **/
 
-    private static final String EXTRA_MAPPER = "${domain}ExtMapper"; //自定义SQL时使用该namespace
+    private static final String EXTRA_MAPPER = "${domain}ExtMapper."; //自定义SQL时使用该namespace
 
-    private static final String DEFAULT_NAMESPACE = "${domain}Mapper";
+    private static final String DEFAULT_NAMESPACE = "${domain}Mapper."; //默认的namespace
 
     public ${domain}Mapper(){
         super(DEFAULT_NAMESPACE);
