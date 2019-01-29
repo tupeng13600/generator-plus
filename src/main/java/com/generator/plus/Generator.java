@@ -104,19 +104,6 @@ public class Generator {
         XmlMapperFactory.write();
     }
 
-    public static void main(String[] args) {
-        Generator.build().ip("10.101.23.101")
-                .port(3306)
-                .database("ucar_cto")
-                .user("ctoserver_w")
-                .password("iBKEYMQBcPhiE6Yz")
-                .projectPath("/Users/tutu/IdeaProjects/MMCMAMS/mmcmams-service")
-                .repositoryPackage("com.uc.mmcmams.repository")
-                .addTables("demo_mess")
-                .gernerate();
-    }
-
-
     private void validate(){
         if(StringUtils.isBlank(ip)) {
             throw new IllegalArgumentException("ip can not be null");
