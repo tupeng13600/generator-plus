@@ -1,6 +1,6 @@
 package ${repositoryPackage}.base;
 
-import com.uc.mmcmams.repository.mapper.DemoMessMapper;
+import ${mapperPackage}.DemoMessMapper;
 import ${mapperPackage}.base.BaseMapper;
 import ${mapperPackage}.${domain}Mapper;
 import ${domainPackage}.${domain};
