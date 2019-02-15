@@ -10,7 +10,7 @@ import java.util.List;
  */
 public abstract class BaseRepository<D, E> {
 
-    public Integer insert(D domain) {
+    public Object insert(D domain) {
         return getMapper().insert(domain);
     }
 

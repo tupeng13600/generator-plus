@@ -46,8 +46,8 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
         return (D) super.queryForObject(mapperNamespace.concat("getById"), id);
     }
 
-    public Integer insert(D domain){
-        return (Integer) super.insert(mapperNamespace.concat("insert"), domain);
+    public Object insert(D domain){
+        return super.insert(mapperNamespace.concat("insert"), domain);
     }
 
     public Integer insertBatch(List<D> list){
