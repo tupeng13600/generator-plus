@@ -1,12 +1,11 @@
 package ${repositoryPackage};
 
 import org.springframework.stereotype.Repository;
-import ${mapperPackage}.DemoMessMapper;
-import ${mapperPackage}.base.BaseMapper;
+import ${basePackage}.BaseMapper;
 import ${mapperPackage}.${domain}Mapper;
 import ${domainPackage}.${domain};
 import ${examplePackage}.${domain}Example;
-import ${repositoryPackage}.base.BaseRepository;
+import ${basePackage}.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

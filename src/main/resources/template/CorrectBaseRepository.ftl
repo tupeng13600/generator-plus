@@ -1,11 +1,11 @@
-package ${repositoryPackage}.base;
+package ${basePackage};
 
 import ${mapperPackage}.DemoMessMapper;
-import ${mapperPackage}.base.BaseMapper;
+import ${basePackage}.BaseMapper;
 import ${mapperPackage}.${domain}Mapper;
 import ${domainPackage}.${domain};
 import ${examplePackage}.${domain}Example;
-import ${repositoryPackage}.base.BaseRepository;
+import ${basePackage}.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class ${domain}BaseRepository extends BaseRepository<${domain}, ${domain}Example> {

@@ -1,4 +1,4 @@
-package ${mapperPackage}.base;
+package ${basePackage};
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.engine.execution.SqlExecutor;

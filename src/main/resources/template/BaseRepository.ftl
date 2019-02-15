@@ -1,6 +1,6 @@
-package ${repositoryPackage}.base;
+package ${basePackage};
 
-import ${mapperPackage}.base.BaseMapper;
+import ${basePackage}.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 /**

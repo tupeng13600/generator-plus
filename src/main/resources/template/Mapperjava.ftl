@@ -2,7 +2,7 @@ package ${mapperPackage};
 
 import ${domainPackage}.${domain};
 import ${examplePackage}.${domain}Example;
-import ${mapperPackage}.base.BaseMapper;
+import ${basePackage}.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 /**
