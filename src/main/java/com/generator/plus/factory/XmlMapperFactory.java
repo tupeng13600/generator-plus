@@ -28,7 +28,7 @@ public class XmlMapperFactory extends GeneratorFactory {
 
     @Override
     protected String desPath(String domainName) {
-        String xmlPath = StringUtils.package2Path(PlusContext.getXmlPackage());
+        String xmlPath = StringUtils.package2Path(PlusContext.getXmlPackage().concat(Constant.XML_DEFAULT_PATH));
         return Constant.RESOURCE_BASE_PATH.concat(xmlPath).concat(domainName).concat(SUFFIX).concat(Constant.XML_SUFFIX);
     }
 

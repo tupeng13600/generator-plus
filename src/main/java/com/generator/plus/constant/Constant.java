@@ -30,7 +30,7 @@ public abstract class Constant {
 
     public static final String XML_SUFFIX = ".xml";
 
-    public static final String EXT_PATH = ".ext";
+    public static final String XML_DEFAULT_PATH = ".default";
 
 
 
