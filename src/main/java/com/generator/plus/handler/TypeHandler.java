@@ -42,6 +42,7 @@ public class TypeHandler {
         typeMap.put("TIMESTAMP", Date.class);
         typeMap.put("TINYINT", Integer.class);
         typeMap.put("VARCHAR", String.class);
+        typeMap.put("TEXT", String.class);
         typeMap.put("ENUM", String.class);
     }
 
