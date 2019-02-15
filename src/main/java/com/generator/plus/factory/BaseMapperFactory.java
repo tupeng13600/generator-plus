@@ -9,6 +9,7 @@ import com.generator.plus.util.FreeMarkerUtils;
 import com.generator.plus.util.Log;
 import com.generator.plus.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,13 +24,13 @@ public class BaseMapperFactory extends GeneratorFactory {
 
     @Override
     protected Map<String, Object> templateArgs(String domainName, List<PropertyModel> propertyList) {
-        return null;
+        return ArgsFactory.initArg(domainName, propertyList, false);
     }
 
     @Override
     protected String desPath(String domainName) {
-        String domainPath = StringUtils.package2Path(PlusContext.getMapperPackage().concat(Constant.BASE_PACKAGE));
-        return Constant.JAVA_BASE_PATH.concat(domainPath).concat(domainName).concat(Constant.JAVA_SUFFIX);
+        String desPath = StringUtils.package2Path(PlusContext.getBasePackage());
+        return Constant.JAVA_BASE_PATH.concat(desPath).concat(domainName).concat(Constant.JAVA_SUFFIX);
     }
 
     @Override

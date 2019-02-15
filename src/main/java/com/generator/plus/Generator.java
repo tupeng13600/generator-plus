@@ -18,7 +18,7 @@ public class Generator {
 
     private String repositoryPackage;
 
-    private Generator(){};
+    private Generator(){}
 
     public static Generator build(){
         return new Generator();
@@ -52,6 +52,11 @@ public class Generator {
     public Generator repositoryPackage(String repositoryPackage){
         this.repositoryPackage = repositoryPackage;
         PlusContext.setRepositoryPackage(repositoryPackage);
+        return this;
+    }
+
+    public Generator baseClassPackage(String baseClassPackage) {
+        PlusContext.setBasePackage(baseClassPackage);
         return this;
     }
 
@@ -96,12 +101,24 @@ public class Generator {
         DomainFactory.write();
         BaseMapperFactory.write();
         BaseRepositoryFactory.write();
-        CorrectRepositoryBaseFactory.write();
+//        CorrectRepositoryBaseFactory.write();
         MapperFactory.write();
         ExampleFactory.write();
         RepositoryFactory.write();
         XmlExtMapperFactory.write();
         XmlMapperFactory.write();
+    }
+
+    public static void main(String[] args) {
+        Generator.build().ip("10.101.23.101")
+                .port(3306)
+                .database("ucar_cto")
+                .user("ctoserver_w")
+                .projectPath("/Users/tutu/IdeaProjects/generator-plus")
+                .password("iBKEYMQBcPhiE6Yz")
+                .repositoryPackage("com.uc.mmcmams.repository")
+                .addTables("t_demo_mess")
+                .gernerate();
     }
 
     private void validate(){

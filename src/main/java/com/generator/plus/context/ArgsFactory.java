@@ -12,6 +12,7 @@ public abstract class ArgsFactory {
         args.put("domainPackage", PlusContext.getDomainPackage());
         args.put("mapperPackage", PlusContext.getMapperPackage());
         args.put("repositoryPackage", PlusContext.getRepositoryPackage());
+        args.put("basePackage", PlusContext.getBasePackage());
         args.put("lombokEnable", PlusContext.getLombokEnable());
         return args;
     }
@@ -22,6 +23,7 @@ public abstract class ArgsFactory {
         args.put("domainPackage", PlusContext.getDomainPackage());
         args.put("mapperPackage", PlusContext.getMapperPackage());
         args.put("repositoryPackage", PlusContext.getRepositoryPackage());
+        args.put("basePackage", PlusContext.getBasePackage());
         args.put("override", override);
         args.put("lombokEnable", PlusContext.getLombokEnable());
 

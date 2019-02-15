@@ -29,6 +29,13 @@ public class JDBCUtil implements Closeable {
 
     private ResultSet rs;
 
+    private static List<String> tableNamePrefix = new ArrayList<>();
+
+    static {
+        tableNamePrefix.add("t_");
+        tableNamePrefix.add("table_");
+    }
+
     private JDBCUtil() {
     }
 
@@ -150,8 +157,9 @@ public class JDBCUtil implements Closeable {
         }
     }
 
-    private String getDomainName(String sqlName){
-        String[] tempList = sqlName.split("_");
+    private String getDomainName(String tableName){
+        tableName = clearTableTag(tableName);
+        String[] tempList = tableName.split("_");
         String result = "";
         for (String temp : tempList) {
             result = result.concat(temp.substring(0, 1).toUpperCase()).concat(temp.substring(1));
@@ -176,6 +184,15 @@ public class JDBCUtil implements Closeable {
             }
         }
         return result;
+    }
+
+    private String clearTableTag(String tableName){
+        for (String namePrefix : tableNamePrefix) {
+            if(tableName.startsWith(namePrefix)) {
+                return tableName.replaceFirst(namePrefix, "");
+            }
+        }
+        return tableName;
     }
 
     @Override

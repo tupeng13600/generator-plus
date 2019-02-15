@@ -26,6 +26,8 @@ public class PlusContext {
 
     private static String desFilePath = null;
 
+    private static String basePackage = null;
+
     public static String getDesFilePath() {
         return desFilePath;
     }
@@ -92,7 +94,7 @@ public class PlusContext {
 
     public static String getExamplePackage() {
         if(null == examplePackage || "".equals(examplePackage.trim())) {
-            return getDomainPackage().concat(".example");
+            return getMapperPackage().concat(".example");
         }
         return examplePackage;
     }
@@ -114,6 +116,17 @@ public class PlusContext {
             return getRepositoryPackage().concat(".mapper");
         }
         return mapperPackage;
+    }
+
+    public static String getBasePackage() {
+        if(null == basePackage || "".equalsIgnoreCase(basePackage.trim())) {
+            return getRepositoryPackage().concat(".base");
+        }
+        return basePackage;
+    }
+
+    public static void setBasePackage(String basePackage) {
+        PlusContext.basePackage = basePackage;
     }
 
     public static void setMapperPackage(String mapperPackage) {
