@@ -25,7 +25,12 @@
             <isNotNull property="distinct">
                 DISTINCT
             </isNotNull>
-            <include refid="allFieldMap" />
+            <isNotNull property="fields">
+                <![CDATA[ $fields$ ]]>
+            </isNotNull>
+            <isNull property="fields">
+                <include refid="allFieldMap" />
+            </isNull>
             FROM ${tableName} WHERE 1=1
             <isNotNull property="conditionSql">
                 <![CDATA[ $conditionSql$ ]]>
@@ -88,12 +93,15 @@
         </dynamic>
     </select>
 
-    <update id="updateById" parameterClass="${domainPackage}.${domain}">
-        update ${tableName}
-        <#list propertyList as property>
-        set ${property.columnName} = ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
-        </#list>
-        where id = #id#
+    <update id="updateByExample" parameterClass="${examplePackage}.${domain}Example">
+        UPDATE ${tableName}
+        <isNotNull property="updatedCondition">
+            <![CDATA[ $updatedCondition$ ]]>
+        </isNotNull>
+        WHERE 1=1
+        <isNotNull property="conditionSql">
+            <![CDATA[ $conditionSql$ ]]>
+        </isNotNull>
     </update>
 
     <delete id="deleteById" parameterClass="java.lang.Long">

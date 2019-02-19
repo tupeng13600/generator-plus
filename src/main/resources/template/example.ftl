@@ -28,7 +28,11 @@ public class ${domain}Example implements Serializable {
 
     protected boolean distinct;
 
+    private StringBuilder updatedCondition = null;
+
     protected List<Criteria> oredCriteria;
+
+    private String fields;
 
     private Integer limit;
 
@@ -46,12 +50,42 @@ public class ${domain}Example implements Serializable {
         return orderByClause;
     }
 
+    public String getUpdatedCondition() {
+        return null == updatedCondition ? null : updatedCondition.toString();
+    }
+
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
     }
 
     public boolean isDistinct() {
         return distinct;
+    }
+
+    public String getFields() {
+        return fields;
+    }
+
+    public void fields(String fields) {
+        this.fields = fields;
+    }
+
+    public void fields(String... fields) {
+        if(null == fields || fields.length == 0) {
+            this.fields = null;
+        } else {
+            StringBuilder builder = new StringBuilder();
+            for(String field : fields) {
+                String column = Field.getColumn(field);
+                if(null == column) {
+                    column = field;
+                }
+                builder.append(column).append(",");
+            }
+            String desFields = builder.toString();
+            desFields = desFields.substring(0, desFields.length() - 1);
+            this.fields = desFields;
+        }
     }
 
     public List<Criteria> getOredCriteria() {
@@ -77,8 +111,7 @@ public class ${domain}Example implements Serializable {
     }
 
     protected Criteria createCriteriaInternal() {
-        Criteria criteria = new Criteria();
-        return criteria;
+        return new Criteria();
     }
 
     public void clear() {
@@ -219,10 +252,46 @@ public class ${domain}Example implements Serializable {
         </#list>
     }
 
+    <#list propertyList as property>
+    public ${domain}Example set${property.methodPropertyName}(${property.typeName} value) {
+        if(updatedCondition == null) {
+            updatedCondition = new StringBuilder();
+            updatedCondition.append(" ")
+                .append("${property.columnName} = ")
+                .append(handlerVal(value));
+        } else {
+            updatedCondition.append(", ${property.columnName} = ").append(handlerVal(value));
+        }
+        return this;
+    }
+    </#list>
+
     public static class Criteria extends GeneratedCriteria {
         protected Criteria() {
             super();
         }
+    }
+
+    private enum Field{
+        <#list propertyList as property>
+        ${property.name}("${property.columnName}"),
+        </#list>
+        ;
+
+        private String columnName;
+
+        Field(String columnName) {
+            this.columnName = columnName;
+        }
+
+        public static String getColumn(String field) {
+            try{
+                return Field.valueOf(field).columnName;
+            }catch (Exception e) {
+                return null;
+            }
+        }
+
     }
 
     public static class Criterion {
@@ -351,6 +420,9 @@ public class ${domain}Example implements Serializable {
     }
 
     private Object handlerVal(Object val) {
+        if(null == val) {
+            return "null";
+        }
         if(val instanceof String) {
             return "'".concat(val.toString()).concat("'");
         }

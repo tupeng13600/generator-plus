@@ -22,18 +22,6 @@ public abstract class BaseRepository<D, E> {
         return getMapper().getById(id);
     }
 
-    public Integer updateById(D domain) {
-        return getMapper().updateById(domain);
-    }
-
-    public List<D> getByExample(E example){
-        return getMapper().getByExample(example);
-    }
-
-    public Long countByExample(E example){
-        return getMapper().countByExample(example);
-    }
-
     public Integer deleteById(Long id){
         return getMapper().deleteById(id);
     }

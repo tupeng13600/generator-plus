@@ -60,8 +60,8 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
         return (Long)queryForObject(mapperNamespace.concat("countByExample"), example);
     }
 
-    public Integer updateById(D domain){
-        return (Integer)queryForObject(mapperNamespace.concat("updateById"), domain);
+    public Integer updateByExample(E example){
+        return (Integer)queryForObject(mapperNamespace.concat("updateByExample"), example);
     }
 
     public Integer deleteById(Long id){
