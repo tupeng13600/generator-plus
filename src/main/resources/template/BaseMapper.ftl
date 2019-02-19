@@ -61,7 +61,7 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
     }
 
     public Integer updateByExample(E example){
-        return (Integer)queryForObject(mapperNamespace.concat("updateByExample"), example);
+        return update(mapperNamespace.concat("updateByExample"), example);
     }
 
     public Integer deleteById(Long id){
