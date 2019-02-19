@@ -66,11 +66,7 @@ public class ${domain}Example implements Serializable {
         return fields;
     }
 
-    public void fields(String fields) {
-        this.fields = fields;
-    }
-
-    public void fields(String... fields) {
+    public ${domain}Example fields(String... fields) {
         if(null == fields || fields.length == 0) {
             this.fields = null;
         } else {
@@ -80,12 +76,13 @@ public class ${domain}Example implements Serializable {
                 if(null == column) {
                     column = field;
                 }
-                builder.append(column).append(",");
+                builder.append(column).append(" AS ").append(field).append(",");
             }
             String desFields = builder.toString();
             desFields = desFields.substring(0, desFields.length() - 1);
             this.fields = desFields;
         }
+        return this;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -291,7 +288,6 @@ public class ${domain}Example implements Serializable {
                 return null;
             }
         }
-
     }
 
     public static class Criterion {
