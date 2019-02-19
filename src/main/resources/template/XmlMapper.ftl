@@ -94,7 +94,7 @@
     </select>
 
     <update id="updateByExample" parameterClass="${examplePackage}.${domain}Example">
-        UPDATE ${tableName}
+        UPDATE ${tableName} SET
         <isNotNull property="updatedCondition">
             <![CDATA[ $updatedCondition$ ]]>
         </isNotNull>
