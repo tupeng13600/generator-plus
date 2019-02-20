@@ -16,12 +16,13 @@ public class TypeHandler {
         typeMap.put("BOOLEAN", Boolean.class);
         typeMap.put("CHAR", String.class);
         typeMap.put("CLOB", String.class);
+        typeMap.put("BLOB", byte[].class);
         typeMap.put("DATALINK", Object.class);
         typeMap.put("DATE", Date.class);
         typeMap.put("DECIMAL", BigDecimal.class);
         typeMap.put("DISTINCT", Object.class);
         typeMap.put("DOUBLE", Double.class);
-        typeMap.put("FLOAT", Double.class);
+        typeMap.put("FLOAT", Float.class);
         typeMap.put("INTEGER", Integer.class);
         typeMap.put("INT", Integer.class);
         typeMap.put("JAVA_OBJECT", Object.class);
