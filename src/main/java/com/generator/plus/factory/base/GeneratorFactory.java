@@ -30,14 +30,16 @@ public abstract class GeneratorFactory {
 
     public void generate() {
         initObjects();
-        domainMap.forEach((domainName, fieldList) -> {
+        for(Map.Entry<String, List<PropertyModel>> entry : domainMap.entrySet()) {
+            String domainName = entry.getKey();
+            List<PropertyModel> fieldList = entry.getValue();
             String templateName = templateName();
             Map<String, Object> templateArgs = templateArgs(domainName, fieldList);
             Boolean override = (Boolean) templateArgs.get("override");
             PlusContext.setDesFilePath(desPath(domainName));
             FreeMarkerUtils.writeFiles(templateName, templateArgs, override == null ? true : override);
             afterGenerate(domainName);
-        });
+        }
     }
 
     protected abstract void afterGenerate(String domain);
