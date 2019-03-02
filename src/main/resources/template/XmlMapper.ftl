@@ -83,9 +83,8 @@
     </insert>
 
     <select id="countByExample" parameterClass="${examplePackage}.${domain}Example" resultClass="java.lang.Long">
-        SELECT
+        SELECT COUNT(1)
         <dynamic>
-            COUNT(1) FROM ${tableName}
             FROM ${tableName} WHERE 1=1
             <isNotNull property="conditionSql">
                 <![CDATA[ $conditionSql$ ]]>
