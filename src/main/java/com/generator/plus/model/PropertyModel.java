@@ -16,10 +16,12 @@ public class PropertyModel {
 
     private String columnName;
 
+    private String columnDefault;
+
     public PropertyModel() {
     }
 
-    public PropertyModel(Class typeClass, String name, String description, String columnName) {
+    public PropertyModel(Class typeClass, String name, String description, String columnName, String columnDefault) {
         this.name = name;
         this.description = description;
         String fullTypeName = typeClass.getName();
@@ -31,6 +33,7 @@ public class PropertyModel {
         }
         this.methodPropertyName = name.substring(0,1).toUpperCase().concat(name.substring(1));
         this.columnName = columnName;
+        this.columnDefault = columnDefault;
     }
 
     public String getName() {

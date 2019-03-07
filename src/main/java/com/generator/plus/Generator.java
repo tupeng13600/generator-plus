@@ -101,6 +101,7 @@ public class Generator {
         DomainFactory.write();
         BaseMapperFactory.write();
         BaseRepositoryFactory.write();
+        BaseExampleFactory.write();
 //        CorrectRepositoryBaseFactory.write();
         MapperFactory.write();
         ExampleFactory.write();

@@ -64,6 +64,15 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
         return update(mapperNamespace.concat("updateByExample"), example);
     }
 
+    public Integer insertBatch(List<D> list){
+        if(null == list || list.size() == 0) {
+            return 0;
+        }
+        Map<${r'String'},List<D>> insertMap = new HashMap<>();
+        insertMap.put("list", list);
+        return (Integer)super.insert(mapperNamespace.concat("insertBatch"), insertMap);
+    }
+
     public Integer deleteById(Long id){
         return deleteObject(mapperNamespace.concat("deleteById"), id);
     }

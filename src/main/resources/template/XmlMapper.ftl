@@ -59,33 +59,54 @@
     </select>
 
     <insert id="insert" parameterClass="${domainPackage}.${domain}">
-        insert into ${tableName} (<include refid="AllFields"/>)
-        values (
-        <#list propertyList as property>
-        ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
-        </#list>
-        )
+        insert into ${tableName}
+        <dynamic>
+            (
+            <#list propertyList as property>
+            <isNotNull property="${property.name}">
+                ${property.columnName}<#if property_has_next>,</#if>
+            </isNotNull>
+            </#list>
+            )
+            values (
+            <#list propertyList as property>
+            <isNotNull property="${property.name}">
+            ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
+            </isNotNull>
+            </#list>
+            )
+        </dynamic>
         <selectKey resultClass="long" keyProperty="id">
             select LASt_INSERT_ID() AS id
         </selectKey>
     </insert>
 
     <insert id="insertBatch" parameterClass="java.util.Map">
-        INSERT INTO ${tableName} (<include refid="AllFields"/>)
-        VALUES
-        <iterate property="list" conjunction=",">
+        INSERT INTO ${tableName}
+        <dynamic>
             (
             <#list propertyList as property>
-                ${r'#'}list[].${property.name}${r'#'}<#if property_has_next>,</#if>
+            <isNotNull  property="${property.name}">
+                ${property.columnName}<#if property_has_next>,</#if>
+            </isNotNull>
             </#list>
             )
-        </iterate>
+            VALUES
+            <iterate property="list" conjunction=",">
+                (
+                <#list propertyList as property>
+                <isNotNull  property="${property.name}">
+                    ${r'#'}list[].${property.name}${r'#'}<#if property_has_next>,</#if>
+                </isNotNull>
+                </#list>
+                )
+            </iterate>
+        </dynamic>
     </insert>
 
     <select id="countByExample" parameterClass="${examplePackage}.${domain}Example" resultClass="java.lang.Long">
-        SELECT COUNT(1)
+        SELECT COUNT(1) FROM ${tableName} WHERE 1=1
         <dynamic>
-            FROM ${tableName} WHERE 1=1
             <isNotNull property="conditionSql">
                 <![CDATA[ $conditionSql$ ]]>
             </isNotNull>
@@ -94,13 +115,29 @@
 
     <update id="updateByExample" parameterClass="${examplePackage}.${domain}Example">
         UPDATE ${tableName} SET
-        <isNotNull property="updatedCondition">
-            <![CDATA[ $updatedCondition$ ]]>
-        </isNotNull>
-        WHERE 1=1
-        <isNotNull property="conditionSql">
-            <![CDATA[ $conditionSql$ ]]>
-        </isNotNull>
+        <dynamic>
+            <isNotNull property="updatedCondition">
+                <![CDATA[ $updatedCondition$ ]]>
+            </isNotNull>
+            WHERE 1=1
+            <isNotNull property="conditionSql">
+                <![CDATA[ $conditionSql$ ]]>
+            </isNotNull>
+        </dynamic>
+    </update>
+
+    <update id="updateBatch" parameterClass="java.util.Map">
+        <dynamic>
+            <iterate property="list" conjunction=";">
+                UPDATE ${tableName} SET
+                <#list propertyList as property>
+                <isNotNull property="list[].${property.name}">
+                ${property.name} = ${r'#'}list[].${property.name}${r'#'} <#if property_has_next>,</#if>
+                </isNotNull>
+                </#list>
+                WHERE id = ${r'#'}list[].id${r'#'}
+            </iterate>
+        </dynamic>
     </update>
 
     <delete id="deleteById" parameterClass="java.lang.Long">

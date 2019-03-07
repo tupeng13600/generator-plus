@@ -50,7 +50,7 @@ public class JDBCUtil implements Closeable {
                 .concat(config.getDatabasename()).concat("?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
         JDBCUtil.tableNameQuery = "select table_name AS tableName from information_schema.tables where table_schema='"
                 .concat(config.getDatabasename()).concat("'");
-        JDBCUtil.columnQueryPrifx = "select column_name columnName,column_comment AS description,data_type AS dataType from information_schema.columns where table_schema='"
+        JDBCUtil.columnQueryPrifx = "select column_name AS columnName,column_comment AS description,data_type AS dataType, column_default AS columnDefault from information_schema.columns where table_schema='"
                 .concat(config.getDatabasename()).concat("'");
     try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -109,9 +109,10 @@ public class JDBCUtil implements Closeable {
                 String columnName = rs.getString("columnName");
                 String description = rs.getString("description");
                 String dataType = rs.getString("dataType");
+                String columnDefault = rs.getString("columnDefault");
                 Class javaType = TypeHandler.handler(dataType);
 
-                propertyModels.add(new PropertyModel(javaType, getFieldName(columnName), description, columnName));
+                propertyModels.add(new PropertyModel(javaType, getFieldName(columnName), description, columnName, columnDefault));
             }
 
         } catch (Exception e) {

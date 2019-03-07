@@ -4,6 +4,8 @@ public abstract class Constant {
 
     public static final String BASE_MAPPER_TEMPLATE = "BaseMapper.ftl";
 
+    public static final String BASE_EXAMPLE_TEMPLATE = "BaseExample.ftl";
+
     public static final String BASE_REPOSITORY_TEMPLATE = "BaseRepository.ftl";
 
     public static final String DOMAIN_TEMPLATE = "domain.ftl";
