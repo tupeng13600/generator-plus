@@ -241,7 +241,7 @@ public abstract class BaseExample<T extends BaseExample.GeneratedCriteria> {
         }
     }
 
-    protected abstract static class GeneratedCriteria {
+    public abstract static class GeneratedCriteria {
 
         protected List<Criterion> criteria;
 
