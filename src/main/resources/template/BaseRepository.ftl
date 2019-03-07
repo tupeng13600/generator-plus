@@ -18,6 +18,10 @@ public abstract class BaseRepository<D, E> {
         return getMapper().insertBatch(list);
     }
 
+    public Integer insertBatch(List<D> list) {
+        return getMapper().updateBatch(list);
+    }
+
     public D getById(Long id) {
         return getMapper().getById(id);
     }
