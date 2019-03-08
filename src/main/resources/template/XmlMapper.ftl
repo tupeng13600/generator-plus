@@ -63,15 +63,15 @@
         <dynamic>
             (
             <#list propertyList as property>
-            <isNotNull property="${property.name}">
-                ${property.columnName}<#if property_has_next>,</#if>
+            <isNotNull property="${property.name}"  prepend=",">
+                ${property.columnName}
             </isNotNull>
             </#list>
             )
             values (
             <#list propertyList as property>
-            <isNotNull property="${property.name}">
-            ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
+            <isNotNull property="${property.name}"  prepend=",">
+            ${r'#'}${property.name}${r'#'}
             </isNotNull>
             </#list>
             )
@@ -86,8 +86,8 @@
         <dynamic>
             (
             <#list propertyList as property>
-            <isNotNull  property="${property.name}">
-                ${property.columnName}<#if property_has_next>,</#if>
+            <isNotNull  property="${property.name}"  prepend=",">
+                ${property.columnName}
             </isNotNull>
             </#list>
             )
@@ -95,8 +95,8 @@
             <iterate property="list" conjunction=",">
                 (
                 <#list propertyList as property>
-                <isNotNull  property="${property.name}">
-                    ${r'#'}list[].${property.name}${r'#'}<#if property_has_next>,</#if>
+                <isNotNull  property="${property.name}" prepend=",">
+                    ${r'#'}list[].${property.name}${r'#'}
                 </isNotNull>
                 </#list>
                 )
@@ -131,8 +131,8 @@
             <iterate property="list" conjunction=";">
                 UPDATE ${tableName} SET
                 <#list propertyList as property>
-                <isNotNull property="list[].${property.name}">
-                ${property.name} = ${r'#'}list[].${property.name}${r'#'} <#if property_has_next>,</#if>
+                <isNotNull property="list[].${property.name}" prepend=",">
+                ${property.name} = ${r'#'}list[].${property.name}${r'#'}
                 </isNotNull>
                 </#list>
                 WHERE id = ${r'#'}list[].id${r'#'}
