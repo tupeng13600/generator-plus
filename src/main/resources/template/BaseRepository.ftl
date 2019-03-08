@@ -18,7 +18,7 @@ public abstract class BaseRepository<D, E> {
         return getMapper().insertBatch(list);
     }
 
-    public Integer insertBatch(List<D> list) {
+    public Integer updateBatch(List<D> list) {
         return getMapper().updateBatch(list);
     }
 
