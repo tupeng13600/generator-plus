@@ -60,22 +60,24 @@
 
     <insert id="insert" parameterClass="${domainPackage}.${domain}">
         insert into ${tableName}
-        <dynamic>
             (
-            <#list propertyList as property>
-            <isNotNull property="${property.name}"  prepend=",">
-                ${property.columnName}
-            </isNotNull>
-            </#list>
+            <dynamic prepend=" ">
+                <#list propertyList as property>
+                <isNotNull property="${property.name}"  prepend="," removeFirstPrepend="true">
+                    ${property.columnName}
+                </isNotNull>
+                </#list>
+            </dynamic>
             )
             values (
-            <#list propertyList as property>
-            <isNotNull property="${property.name}"  prepend=",">
-            ${r'#'}${property.name}${r'#'}
-            </isNotNull>
-            </#list>
+            <dynamic prepend=" ">
+                <#list propertyList as property>
+                <isNotNull property="${property.name}"  prepend="," removeFirstPrepend="true">
+                ${r'#'}${property.name}${r'#'}
+                </isNotNull>
+                </#list>
+            </dynamic>
             )
-        </dynamic>
         <selectKey resultClass="long" keyProperty="id">
             select LASt_INSERT_ID() AS id
         </selectKey>
@@ -86,18 +88,14 @@
         <dynamic>
             (
             <#list propertyList as property>
-            <isNotNull  property="${property.name}"  prepend=",">
                 ${property.columnName}
-            </isNotNull>
             </#list>
             )
             VALUES
             <iterate property="list" conjunction=",">
                 (
                 <#list propertyList as property>
-                <isNotNull  property="${property.name}" prepend=",">
                     ${r'#'}list[].${property.name}${r'#'}
-                </isNotNull>
                 </#list>
                 )
             </iterate>
@@ -115,7 +113,7 @@
 
     <update id="updateByExample" parameterClass="${examplePackage}.${domain}Example">
         UPDATE ${tableName} SET
-        <dynamic>
+        <dynamic prepend=" ">
             <isNotNull property="updatedCondition">
                 <![CDATA[ $updatedCondition$ ]]>
             </isNotNull>
@@ -127,9 +125,10 @@
     </update>
 
     <update id="updateBatch" parameterClass="java.util.Map">
-        <dynamic>
+        <dynamic prepend=" ">
             <iterate property="list" conjunction=";">
                 UPDATE ${tableName} SET
+                 id = id
                 <#list propertyList as property>
                 <isNotNull property="list[].${property.name}" prepend=",">
                 ${property.name} = ${r'#'}list[].${property.name}${r'#'}
