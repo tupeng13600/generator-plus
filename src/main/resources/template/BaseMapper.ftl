@@ -77,9 +77,7 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
         if(null == list || list.size() == 0) {
             return 0;
         }
-        Map<${r'String'},List<D>> updateMap = new HashMap<>();
-        updateMap.put("list", list);
-        super.update(mapperNamespace.concat("updateBatch"), updateMap);
+        super.batchUpdate(mapperNamespace.concat("updateById"), list);
         return list.size();
     }
 

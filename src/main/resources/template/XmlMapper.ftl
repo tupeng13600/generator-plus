@@ -61,7 +61,7 @@
     <insert id="insert" parameterClass="${domainPackage}.${domain}">
         insert into ${tableName}
             (
-            <dynamic prepend=" ">
+            <dynamic>
                 <#list propertyList as property>
                 <isNotNull property="${property.name}"  prepend="," removeFirstPrepend="true">
                     ${property.columnName}
@@ -70,7 +70,7 @@
             </dynamic>
             )
             values (
-            <dynamic prepend=" ">
+            <dynamic>
                 <#list propertyList as property>
                 <isNotNull property="${property.name}"  prepend="," removeFirstPrepend="true">
                 ${r'#'}${property.name}${r'#'}
@@ -124,18 +124,18 @@
         </dynamic>
     </update>
 
-    <update id="updateBatch" parameterClass="java.util.Map">
+    <update id="updateById" parameterClass="${domainPackage}.${domain}">
         <dynamic>
-            <iterate property="list" conjunction=";">
-                UPDATE ${tableName} SET
-                 id = id
+            UPDATE ${tableName} SET
+                id = id
                 <#list propertyList as property>
-                <isNotNull property="list[].${property.name}" prepend=",">
-                ${property.columnName} = ${r'#'}list[].${property.name}${r'#'}
+                <#if property.name != 'id'>
+                <isNotNull property="${property.name}" prepend=",">
+                ${property.columnName} = ${r'#'}${property.name}${r'#'}
                 </isNotNull>
+                </#if>
                 </#list>
-                WHERE id = ${r'#'}list[].id${r'#'}
-            </iterate>
+                WHERE id = ${r'#'}id${r'#'}
         </dynamic>
     </update>
 
