@@ -50,12 +50,6 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
         return super.insert(mapperNamespace.concat("insert"), domain);
     }
 
-    public Integer insertBatch(List<D> list){
-        Map<${r'String'},List<D>> insertMap = new HashMap<>();
-        insertMap.put("list", list);
-        return (Integer)super.insert(mapperNamespace.concat("insertBatch"), insertMap);
-    }
-
     public Long countByExample(E example){
         return (Long)queryForObject(mapperNamespace.concat("countByExample"), example);
     }

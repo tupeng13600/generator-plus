@@ -61,7 +61,7 @@
     <insert id="insert" parameterClass="${domainPackage}.${domain}">
         insert into ${tableName}
             (
-            <dynamic>
+            <dynamic prepend=" ">
                 <#list propertyList as property>
                 <isNotNull property="${property.name}"  prepend="," removeFirstPrepend="true">
                     ${property.columnName}
@@ -70,7 +70,7 @@
             </dynamic>
             )
             values (
-            <dynamic>
+            <dynamic prepend=" ">
                 <#list propertyList as property>
                 <isNotNull property="${property.name}"  prepend="," removeFirstPrepend="true">
                 ${r'#'}${property.name}${r'#'}
