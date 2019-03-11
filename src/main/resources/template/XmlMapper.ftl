@@ -88,14 +88,14 @@
         <dynamic>
             (
             <#list propertyList as property>
-                ${property.columnName}
+                ${property.columnName}<#if property_has_next>,</#if>
             </#list>
             )
             VALUES
             <iterate property="list" conjunction=",">
                 (
                 <#list propertyList as property>
-                    ${r'#'}list[].${property.name}${r'#'}
+                    ${r'#'}list[].${property.name}${r'#'}<#if property_has_next>,</#if>
                 </#list>
                 )
             </iterate>
