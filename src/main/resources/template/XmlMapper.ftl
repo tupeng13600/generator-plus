@@ -113,7 +113,7 @@
 
     <update id="updateByExample" parameterClass="${examplePackage}.${domain}Example">
         UPDATE ${tableName} SET
-        <dynamic prepend=" ">
+        <dynamic>
             <isNotNull property="updatedCondition">
                 <![CDATA[ $updatedCondition$ ]]>
             </isNotNull>
@@ -125,13 +125,13 @@
     </update>
 
     <update id="updateBatch" parameterClass="java.util.Map">
-        <dynamic prepend=" ">
+        <dynamic>
             <iterate property="list" conjunction=";">
                 UPDATE ${tableName} SET
                  id = id
                 <#list propertyList as property>
                 <isNotNull property="list[].${property.name}" prepend=",">
-                ${property.name} = ${r'#'}list[].${property.name}${r'#'}
+                ${property.columnName} = ${r'#'}list[].${property.name}${r'#'}
                 </isNotNull>
                 </#list>
                 WHERE id = ${r'#'}list[].id${r'#'}
