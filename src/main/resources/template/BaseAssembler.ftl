@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Example 基础生成类,无需修改
+ * Assembler 基础生成类,无需修改
  */
-public abstract class BaseExample<T extends BaseExample.GeneratedCriteria> {
+public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
 
     private static final String AND = " AND ";
 
@@ -32,7 +32,7 @@ public abstract class BaseExample<T extends BaseExample.GeneratedCriteria> {
 
     private Integer offset;
 
-    public BaseExample() {
+    public BaseAssembler() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -317,7 +317,7 @@ public abstract class BaseExample<T extends BaseExample.GeneratedCriteria> {
 
     protected abstract String getColumn(String field);
 
-    public BaseExample<T> fields(String... fields) {
+    public BaseAssemblere<T> fields(String... fields) {
         if(null == fields || fields.length == 0) {
             this.fields = null;
         } else {

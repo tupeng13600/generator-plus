@@ -10,13 +10,13 @@ import com.generator.plus.util.StringUtils;
 
 import java.util.*;
 
-public class ExampleFactory extends GeneratorFactory {
+public class AssemblerFactory extends GeneratorFactory {
 
-    private static String SUFFIX = "Example";
+    private static String SUFFIX = "Assembler";
 
     @Override
     protected String templateName() {
-        return Constant.EXAMPLE_TEMPLATE;
+        return Constant.ASSEMBLER_TEMPLATE;
     }
 
     @Override
@@ -26,16 +26,16 @@ public class ExampleFactory extends GeneratorFactory {
 
     @Override
     protected String desPath(String domainName) {
-        String examplePath = StringUtils.package2Path(PlusContext.getExamplePackage());
-        return Constant.JAVA_BASE_PATH.concat(examplePath).concat(domainName).concat(SUFFIX).concat(Constant.JAVA_SUFFIX);
+        String assemblerPath = StringUtils.package2Path(PlusContext.getAssemblerPackage());
+        return Constant.JAVA_BASE_PATH.concat(assemblerPath).concat(domainName).concat(SUFFIX).concat(Constant.JAVA_SUFFIX);
     }
 
     public static void write() {
-        new ExampleFactory().generate();
+        new AssemblerFactory().generate();
     }
 
     @Override
     protected void afterGenerate(String domain) {
-        Log.info(domain.concat("Example.java"), PlusContext.getDesFilePath());
+        Log.info(domain.concat("Assembler.java"), PlusContext.getDesFilePath());
     }
 }

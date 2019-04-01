@@ -4,13 +4,13 @@ public abstract class Constant {
 
     public static final String BASE_MAPPER_TEMPLATE = "BaseMapper.ftl";
 
-    public static final String BASE_EXAMPLE_TEMPLATE = "BaseExample.ftl";
+    public static final String BASE_ASSEMBLER_TEMPLATE = "BaseAssembler.ftl";
 
     public static final String BASE_REPOSITORY_TEMPLATE = "BaseRepository.ftl";
 
     public static final String DOMAIN_TEMPLATE = "domain.ftl";
 
-    public static final String EXAMPLE_TEMPLATE = "example.ftl";
+    public static final String ASSEMBLER_TEMPLATE = "assembler.ftl";
 
     public static final String MAPPER_TEMPLATE = "Mapperjava.ftl";
 

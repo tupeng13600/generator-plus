@@ -12,13 +12,13 @@ import com.generator.plus.util.StringUtils;
 import java.util.List;
 import java.util.Map;
 
-public class BaseExampleFactory extends GeneratorFactory {
+public class BaseAssemblerFactory extends GeneratorFactory {
 
-    private static String NAME = "BaseExample";
+    private static String NAME = "BaseAssembler";
 
     @Override
     protected String templateName() {
-        return Constant.BASE_EXAMPLE_TEMPLATE;
+        return Constant.BASE_ASSEMBLER_TEMPLATE;
     }
 
     @Override
@@ -42,11 +42,11 @@ public class BaseExampleFactory extends GeneratorFactory {
 
     @Override
     protected void afterGenerate(String domain) {
-        Log.info("BaseExample.java", PlusContext.getDesFilePath());
+        Log.info("BaseAssembler.java", PlusContext.getDesFilePath());
     }
 
     public static void write(){
-        new BaseExampleFactory().generate();
+        new BaseAssemblerFactory().generate();
     }
 
 }

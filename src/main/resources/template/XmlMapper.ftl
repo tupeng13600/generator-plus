@@ -19,7 +19,7 @@
         </#list>
     </sql>
 
-    <select id="getByExample" parameterClass="${examplePackage}.${domain}Example" resultClass="${domainPackage}.${domain}">
+    <select id="getByAssembler" parameterClass="${assemblerPackage}.${domain}Assembler" resultClass="${domainPackage}.${domain}">
         SELECT
         <dynamic>
             <isNotNull property="distinct">
@@ -102,7 +102,7 @@
         </dynamic>
     </insert>
 
-    <select id="countByExample" parameterClass="${examplePackage}.${domain}Example" resultClass="java.lang.Long">
+    <select id="countByAssembler" parameterClass="${assemblerPackage}.${domain}Assembler" resultClass="java.lang.Long">
         SELECT COUNT(1) FROM ${tableName} WHERE 1=1
         <dynamic>
             <isNotNull property="conditionSql">
@@ -111,7 +111,7 @@
         </dynamic>
     </select>
 
-    <update id="updateByExample" parameterClass="${examplePackage}.${domain}Example">
+    <update id="updateByAssembler" parameterClass="${assemblerPackage}.${domain}Assembler">
         UPDATE ${tableName} SET
         <dynamic>
             <isNotNull property="updatedCondition">

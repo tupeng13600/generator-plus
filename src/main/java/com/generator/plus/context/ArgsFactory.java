@@ -8,7 +8,7 @@ public abstract class ArgsFactory {
 
     public static Map<String, Object> initArg(){
         Map<String, Object> args = new HashMap<>();
-        args.put("examplePackage", PlusContext.getExamplePackage());
+        args.put("assemblerPackage", PlusContext.getAssemblerPackage());
         args.put("domainPackage", PlusContext.getDomainPackage());
         args.put("mapperPackage", PlusContext.getMapperPackage());
         args.put("repositoryPackage", PlusContext.getRepositoryPackage());
@@ -19,7 +19,7 @@ public abstract class ArgsFactory {
 
     public static Map<String, Object> initArg(String domainName, List<PropertyModel> propertyList, Boolean override){
         Map<String, Object> args = new HashMap<>();
-        args.put("examplePackage", PlusContext.getExamplePackage());
+        args.put("assemblerPackage", PlusContext.getAssemblerPackage());
         args.put("domainPackage", PlusContext.getDomainPackage());
         args.put("mapperPackage", PlusContext.getMapperPackage());
         args.put("repositoryPackage", PlusContext.getRepositoryPackage());

@@ -1,7 +1,7 @@
 package ${mapperPackage};
 
 import ${domainPackage}.${domain};
-import ${examplePackage}.${domain}Example;
+import ${assemblerPackage}.${domain}Assembler;
 import ${basePackage}.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public class ${domain}Mapper extends BaseMapper<${domain}, ${domain}Example> {
+public class ${domain}Mapper extends BaseMapper<${domain}, ${domain}Assembler> {
 
     /** 这部分代码为自动生成代码, 一般情况无需修改 **/
 

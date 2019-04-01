@@ -70,8 +70,8 @@ public class Generator {
         return this;
     }
 
-    public Generator examplePackage(String examplePackage){
-        PlusContext.setExamplePackage(examplePackage);
+    public Generator assemblerPackage(String assemblerPackage){
+        PlusContext.setAssemblerPackage(assemblerPackage);
         return this;
     }
 
@@ -101,10 +101,10 @@ public class Generator {
         DomainFactory.write();
         BaseMapperFactory.write();
         BaseRepositoryFactory.write();
-        BaseExampleFactory.write();
+        BaseAssemblerFactory.write();
 //        CorrectRepositoryBaseFactory.write();
         MapperFactory.write();
-        ExampleFactory.write();
+        AssemblerFactory.write();
         RepositoryFactory.write();
         XmlExtMapperFactory.write();
         XmlMapperFactory.write();

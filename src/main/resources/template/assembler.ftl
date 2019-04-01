@@ -1,8 +1,8 @@
-package ${examplePackage};
+package ${assemblerPackage};
 
 import java.util.List;
 import java.io.Serializable;
-import ${basePackage}.BaseExample;
+import ${basePackage}.BaseAssembler;
 <#if importList??>
 <#list importList as imp>
 import ${imp};
@@ -14,9 +14,9 @@ import ${imp};
  * 该文件无需手动修改，若表变更，运行一次Generator即可，会自动刷新
  *
  */
-public class ${domain}Example extends BaseExample<${domain}Example.Criteria> implements Serializable {
+public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteria> implements Serializable {
 
-    public ${domain}Example() {
+    public ${domain}Assembler() {
         super();
     }
 
@@ -31,7 +31,7 @@ public class ${domain}Example extends BaseExample<${domain}Example.Criteria> imp
     }
 
     <#list propertyList as property>
-    public ${domain}Example set${property.methodPropertyName}(${property.typeName} value) {
+    public ${domain}Assembler set${property.methodPropertyName}(${property.typeName} value) {
 
         if(null == value) {
             return this;
@@ -49,7 +49,7 @@ public class ${domain}Example extends BaseExample<${domain}Example.Criteria> imp
     }
     </#list>
 
-    public static class Criteria extends BaseExample.GeneratedCriteria {
+    public static class Criteria extends BaseAssembler.GeneratedCriteria {
         protected Criteria() {
             super();
         }

@@ -38,8 +38,8 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
         this.setSqlExecutors(sqlExecutorCarSale);
     }
 
-    public List<D> getByExample(E example){
-        return (List<D>) super.queryForList(mapperNamespace.concat("getByExample"), example);
+    public List<D> getByAssembler(E assembler){
+        return (List<D>) super.queryForList(mapperNamespace.concat("getByAssembler"), assembler);
     }
 
     public D getById(Long id){
@@ -50,12 +50,12 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
         return super.insert(mapperNamespace.concat("insert"), domain);
     }
 
-    public Long countByExample(E example){
-        return (Long)queryForObject(mapperNamespace.concat("countByExample"), example);
+    public Long countByAssembler(E assembler){
+        return (Long)queryForObject(mapperNamespace.concat("countByAssembler"), assembler);
     }
 
-    public Integer updateByExample(E example){
-        return update(mapperNamespace.concat("updateByExample"), example);
+    public Integer updateByAssembler(E assembler){
+        return update(mapperNamespace.concat("updateByAssembler"), assembler);
     }
 
     public Integer insertBatch(List<D> list){

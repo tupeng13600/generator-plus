@@ -4,17 +4,17 @@ import ${mapperPackage}.DemoMessMapper;
 import ${basePackage}.BaseMapper;
 import ${mapperPackage}.${domain}Mapper;
 import ${domainPackage}.${domain};
-import ${examplePackage}.${domain}Example;
+import ${assemblerPackage}.${domain}Assembler;
 import ${basePackage}.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class ${domain}BaseRepository extends BaseRepository<${domain}, ${domain}Example> {
+public abstract class ${domain}BaseRepository extends BaseRepository<${domain}, ${domain}Assembler> {
 
     @Autowired
     private ${domain}Mapper mapper;
 
     @Override
-    protected BaseMapper<${domain}, ${domain}Example> getMapper() {
+    protected BaseMapper<${domain}, ${domain}Assembler> getMapper() {
         return mapper;
     }
 }

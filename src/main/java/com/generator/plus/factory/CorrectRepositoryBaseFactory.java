@@ -27,8 +27,8 @@ public class CorrectRepositoryBaseFactory extends GeneratorFactory {
 
     @Override
     protected String desPath(String domainName) {
-        String examplePath = StringUtils.package2Path(PlusContext.getBasePackage());
-        return Constant.JAVA_BASE_PATH.concat(examplePath).concat(domainName).concat(SUFFIX).concat(Constant.JAVA_SUFFIX);
+        String assemblerPath = StringUtils.package2Path(PlusContext.getBasePackage());
+        return Constant.JAVA_BASE_PATH.concat(assemblerPath).concat(domainName).concat(SUFFIX).concat(Constant.JAVA_SUFFIX);
     }
 
     public static void write() {

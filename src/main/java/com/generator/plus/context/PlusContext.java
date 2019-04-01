@@ -10,7 +10,7 @@ public class PlusContext {
 
     private static String domainPackage = null;
 
-    private static String examplePackage = null;
+    private static String assemblerPackage = null;
 
     private static Boolean lombokEnable = false;
 
@@ -92,15 +92,15 @@ public class PlusContext {
         }
     }
 
-    public static String getExamplePackage() {
-        if(null == examplePackage || "".equals(examplePackage.trim())) {
-            return getMapperPackage().concat(".example");
+    public static String getAssemblerPackage() {
+        if(null == assemblerPackage || "".equals(assemblerPackage.trim())) {
+            return getMapperPackage().concat(".assembler");
         }
-        return examplePackage;
+        return assemblerPackage;
     }
 
-    public static void setExamplePackage(String examplePackage) {
-        PlusContext.examplePackage = examplePackage;
+    public static void setAssemblerPackage(String assemblerPackage) {
+        PlusContext.assemblerPackage = assemblerPackage;
     }
 
     public static String getXmlPackage() {
