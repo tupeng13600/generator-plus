@@ -306,6 +306,7 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
             return "null";
         }
         if (val instanceof String) {
+            String strVal = val.toString().replaceAll("'", "\\\\'")
             return "'".concat(val.toString()).concat("'");
         }
         if (val instanceof Date) {
@@ -317,7 +318,7 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
 
     protected abstract String getColumn(String field);
 
-    public BaseAssemblere<T> fields(String... fields) {
+    public BaseAssembler<T> fields(String... fields) {
         if(null == fields || fields.length == 0) {
             this.fields = null;
         } else {

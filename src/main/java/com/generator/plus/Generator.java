@@ -120,6 +120,7 @@ public class Generator {
                 .repositoryPackage("com.uc.mmcmams.repository")
                 .addTables("t_demo_mess")
                 .gernerate();
+
     }
 
     private void validate(){
