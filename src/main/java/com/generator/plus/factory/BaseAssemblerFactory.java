@@ -23,7 +23,7 @@ public class BaseAssemblerFactory extends GeneratorFactory {
 
     @Override
     protected Map<String, Object> templateArgs(String domainName, List<PropertyModel> propertyList) {
-        return ArgsFactory.initArg(domainName, propertyList, false);
+        return ArgsFactory.initArg(domainName, propertyList, true);
     }
 
     @Override
