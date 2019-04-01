@@ -306,7 +306,8 @@ public abstract class BaseExample<T extends BaseExample.GeneratedCriteria> {
             return "null";
         }
         if (val instanceof String) {
-            return "'".concat(val.toString()).concat("'");
+            String strVal = val.toString().replaceAll("'", "\\\\'")
+            return "'".concat(strVal).concat("'");
         }
         if (val instanceof Date) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
