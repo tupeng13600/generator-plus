@@ -42,7 +42,6 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
 
             toStrMethod = IbatisDaoImpl.class.getDeclaredMethod("toStr", SortSet.class);
             toStrMethod.setAccessible(true);
-            super.setSqlMapClientTemplate(new SqlMapClientTemplateExtendLog());
         } catch (NoSuchMethodException e) {
             logger.error("不支持的方法，请检查是否继承IbatisDaoImpl！ " + e.getMessage(), e);
         }
