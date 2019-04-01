@@ -306,7 +306,7 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
             return "null";
         }
         if (val instanceof String) {
-            String strVal = val.toString().replaceAll("'", "\\\\'")
+            String strVal = val.toString().replaceAll("'", "\\\\'");
             return "'".concat(strVal).concat("'");
         }
         if (val instanceof Date) {
