@@ -22,7 +22,7 @@ import static com.zuche.framework.utils.StringUtils.isBlank;
 
 /**
  *
- *该文件无需修改，为自动生成
+ *该文件无需修改，为自动生成，且一旦生成将不再改变
  */
 public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
 
@@ -88,7 +88,7 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
         }
 
         if (limit == null) {
-            if (queryParam instanceof BaseExample && statementId == null) {
+            if (queryParam instanceof BaseAssembler && statementId == null) {
                 return (List<T>) getByAssembler((E) queryParam);
             } else if (queryParam instanceof QueryCond) {
                 QueryCond queryCond = (QueryCond) queryParam;
@@ -125,11 +125,11 @@ public abstract class BaseMapper<D, E> extends IbatisDaoImpl {
                 end = ((QueryCond) queryParam).getEndIndex();
             }
         }
-        if (queryParam instanceof BaseExample) {
-            BaseExample example = (BaseExample) queryParam;
-            example.setOffset(start);
-            example.setLimit(limit.getRowSelect().getMaxRows());
-            example.setOrderByClause(orderByStr);
+        if (queryParam instanceof BaseAssembler) {
+            BaseAssembler assembler = (BaseAssembler) queryParam;
+            assembler.setOffset(start);
+            assembler.setLimit(limit.getRowSelect().getMaxRows());
+            assembler.setOrderByClause(orderByStr);
             return (List<T>) getByAssembler((E) queryParam);
         }
         return this.getSqlMapClientTemplate().queryForList(statementId, queryParam, start, end,null);
