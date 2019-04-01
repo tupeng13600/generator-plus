@@ -1,8 +1,7 @@
-package com.mmc.mams.repository.base;
+package ${basePackage};
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.engine.execution.SqlExecutor;
-import com.uc.log.monitor.sql.SqlMapClientTemplateExtendLog;
 import com.zuche.framework.common.RequestContext;
 import com.zuche.framework.dao.IbatisDaoImpl;
 import com.zuche.framework.dao.util.QueryCond;
