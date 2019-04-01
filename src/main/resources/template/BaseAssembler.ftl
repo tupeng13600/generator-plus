@@ -307,7 +307,7 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
         }
         if (val instanceof String) {
             String strVal = val.toString().replaceAll("'", "\\\\'")
-            return "'".concat(val.toString()).concat("'");
+            return "'".concat(strVal).concat("'");
         }
         if (val instanceof Date) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
