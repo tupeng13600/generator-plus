@@ -36,7 +36,7 @@ public class BaseAssemblerFactory extends GeneratorFactory {
     public void generate() {
         Map<String, Object> args = ArgsFactory.initArg();
         PlusContext.setDesFilePath(desPath(NAME));
-        FreeMarkerUtils.writeFiles(templateName(), args,false);
+        FreeMarkerUtils.writeFiles(templateName(), args,true);
         afterGenerate(NAME);
     }
 

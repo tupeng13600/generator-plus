@@ -24,7 +24,7 @@ public class BaseMapperFactory extends GeneratorFactory {
 
     @Override
     protected Map<String, Object> templateArgs(String domainName, List<PropertyModel> propertyList) {
-        return ArgsFactory.initArg(domainName, propertyList, false);
+        return ArgsFactory.initArg(domainName, propertyList, true);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class BaseMapperFactory extends GeneratorFactory {
     public void generate() {
         Map<String, Object> args = ArgsFactory.initArg();
         PlusContext.setDesFilePath(desPath(NAME));
-        FreeMarkerUtils.writeFiles(templateName(), args,false);
+        FreeMarkerUtils.writeFiles(templateName(), args,true);
         afterGenerate(NAME);
     }
 
