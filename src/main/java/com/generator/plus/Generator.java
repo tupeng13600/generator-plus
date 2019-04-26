@@ -111,14 +111,14 @@ public class Generator {
     }
 
     public static void main(String[] args) {
-        Generator.build().ip("10.101.23.101")
+        Generator.build().ip("10.104.50.25")
                 .port(3306)
-                .database("ucar_cto")
-                .user("ctoserver_w")
+                .database("mmc_admin")
+                .user("mmcadmin_w")
                 .projectPath("/Users/tutu/IdeaProjects/generator-plus")
-                .password("iBKEYMQBcPhiE6Yz")
+                .password("aY2cpKmEJQNBh5Cc")
                 .repositoryPackage("com.uc.mmcmams.repository")
-                .addTables("t_demo_mess")
+                .addTables("t_user_test")
                 .gernerate();
 
     }

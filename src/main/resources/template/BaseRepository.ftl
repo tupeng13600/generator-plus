@@ -1,6 +1,5 @@
 package ${basePackage};
 
-import ${basePackage}.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 /**
@@ -9,6 +8,9 @@ import java.util.List;
  *
  */
 public abstract class BaseRepository<D, E> {
+
+    @Autowired
+    private BaseMapper<D, E> mapper;
 
     public Object insert(D domain) {
         return getMapper().insert(domain);
@@ -30,6 +32,8 @@ public abstract class BaseRepository<D, E> {
         return getMapper().deleteById(id);
     }
 
-    protected abstract BaseMapper<D, E> getMapper();
+    protected BaseMapper<D, E> getMapper() {
+        return mapper;
+    }
 
 }

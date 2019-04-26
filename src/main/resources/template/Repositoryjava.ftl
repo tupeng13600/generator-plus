@@ -1,12 +1,9 @@
 package ${repositoryPackage};
 
 import org.springframework.stereotype.Repository;
-import ${basePackage}.BaseMapper;
-import ${mapperPackage}.${domain}Mapper;
 import ${domainPackage}.${domain};
 import ${assemblerPackage}.${domain}Assembler;
 import ${basePackage}.BaseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -15,13 +12,5 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Repository
 public class ${domain}Repository extends BaseRepository<${domain}, ${domain}Assembler> {
-
-    @Autowired
-    private ${domain}Mapper mapper;
-
-    @Override
-    protected BaseMapper<${domain}, ${domain}Assembler> getMapper() {
-        return mapper;
-    }
 
 }
