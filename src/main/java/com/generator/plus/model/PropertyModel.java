@@ -18,14 +18,22 @@ public class PropertyModel {
 
     private String columnDefault;
 
+    private String columnType;
+
     public PropertyModel() {
     }
 
-    public PropertyModel(Class typeClass, String name, String description, String columnName, String columnDefault) {
+    public PropertyModel(Class typeClass, String name, String description, String columnName, String columnDefault, String columnType) {
         this.name = name;
         this.description = description;
+
         String fullTypeName = typeClass.getName();
         this.typeName = typeClass.getSimpleName();
+
+        if("Integer".equals(typeName) && null != columnType && columnType.contains("unsigned")) {
+            this.typeName = "Long";
+        }
+
         if(fullTypeName.startsWith(BASE_TYPE)) {
             this.fullTypeName = null;
         } else {
@@ -34,6 +42,7 @@ public class PropertyModel {
         this.methodPropertyName = name.substring(0,1).toUpperCase().concat(name.substring(1));
         this.columnName = columnName;
         this.columnDefault = columnDefault;
+        this.columnType = columnType;
     }
 
     public String getName() {
@@ -82,6 +91,22 @@ public class PropertyModel {
 
     public void setColumnName(String columnName) {
         this.columnName = columnName;
+    }
+
+    public String getColumnDefault() {
+        return columnDefault;
+    }
+
+    public void setColumnDefault(String columnDefault) {
+        this.columnDefault = columnDefault;
+    }
+
+    public String getColumnType() {
+        return columnType;
+    }
+
+    public void setColumnType(String columnType) {
+        this.columnType = columnType;
     }
 }
 
