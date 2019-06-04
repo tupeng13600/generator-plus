@@ -34,8 +34,4 @@ public abstract class Constant {
 
     public static final String XML_DEFAULT_PATH = ".default";
 
-
-
-
-
 }

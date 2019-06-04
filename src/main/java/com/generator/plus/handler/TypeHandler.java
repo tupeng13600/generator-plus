@@ -1,5 +1,8 @@
 package com.generator.plus.handler;
 
+import com.generator.plus.constant.Constant;
+import com.generator.plus.constant.Str;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,13 +50,17 @@ public class TypeHandler {
         typeMap.put("ENUM", String.class);
     }
 
-    public static Class handler(String dbType) {
+    private static Class handler(String dbType) {
         Class clazz = typeMap.get(dbType.toUpperCase());
         if (null == clazz) {
             throw new IllegalArgumentException("un support type 4 field:".concat(dbType));
         } else {
             return clazz;
         }
+    }
+
+    public static Class handler(String dbFieldName, String dbType) {
+        return dbFieldName.startsWith(Str.IS_) ? Boolean.class : handler(dbType);
     }
 
 }
