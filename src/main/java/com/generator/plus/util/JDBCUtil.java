@@ -1,6 +1,5 @@
 package com.generator.plus.util;
 
-import com.generator.plus.constant.Constant;
 import com.generator.plus.constant.Str;
 import com.generator.plus.context.DataSourceConfig;
 import com.generator.plus.context.PlusContext;
@@ -112,7 +111,7 @@ public class JDBCUtil implements Closeable {
                 String dataType = rs.getString("dataType");
                 String columnDefault = rs.getString("columnDefault");
                 Class javaType = TypeHandler.handler(columnName, dataType);
-                propertyModels.add(new PropertyModel(javaType, getFieldName(columnName), description, columnName, columnDefault));
+                propertyModels.add(new PropertyModel(javaType, getFieldName(columnName), description, columnName, columnDefault, dataType));
             }
 
         } catch (Exception e) {
