@@ -17,7 +17,7 @@ import ${imp};
 <#if (lombokEnable?string('yes', 'no'))=='yes'>
 @Data
 </#if>
-@IbatisAliasConfig(alias = "${domain}")
+@IbatisAliasConfig(alias = "${domain?uncap_first}")
 public class ${domain} {
 
 <#if propertyList??>
