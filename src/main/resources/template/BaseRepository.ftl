@@ -7,7 +7,7 @@ import java.util.List;
  * 该文件无需手动修改，若表变更，运行一次Generator即可，会自动刷新
  *
  */
-public abstract class BaseRepository<D, E> {
+public abstract class BaseRepository<D, E, M extends BaseMapper<D, E>> {
 
     @Autowired
     private BaseMapper<D, E> mapper;
@@ -32,8 +32,8 @@ public abstract class BaseRepository<D, E> {
         return getMapper().deleteById(id);
     }
 
-    protected <T extends BaseMapper<D, E>> T getMapper() {
-        return (T) mapper;
+    protected M getMapper() {
+        return (M) mapper;
     }
 
 }

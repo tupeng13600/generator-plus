@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import ${domainPackage}.${domain};
 import ${assemblerPackage}.${domain}Assembler;
 import ${basePackage}.BaseRepository;
+import ${mapperPackage}.${domain}Mapper;
 
 /**
  *
@@ -11,6 +12,6 @@ import ${basePackage}.BaseRepository;
  *
  */
 @Repository
-public class ${domain}Repository extends BaseRepository<${domain}, ${domain}Assembler> {
+public class ${domain}Repository extends BaseRepository<${domain}, ${domain}Assembler, ${domain}Mapper> {
 
 }
