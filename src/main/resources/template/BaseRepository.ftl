@@ -32,8 +32,8 @@ public abstract class BaseRepository<D, E> {
         return getMapper().deleteById(id);
     }
 
-    protected BaseMapper<D, E> getMapper() {
-        return mapper;
+    protected <T extends BaseMapper<D, E>> T getMapper() {
+        return (T) mapper;
     }
 
 }
