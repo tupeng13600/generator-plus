@@ -14,10 +14,13 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
 
     private String mapperNamespace;
 
+    private String extMapperNamespace;
+
     @SuppressWarnings("unchecked")
-    public BaseMapper(String mapperNamespace) {
+    public BaseMapper(String mapperNamespace, String extMapperNamespace) {
         super(true);
         this.mapperNamespace = mapperNamespace;
+        this.extMapperNamespace = extMapperNamespace;
     }
 
     public List<D> getByAssembler(E assembler){
@@ -59,6 +62,14 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
 
     public Integer deleteById(Long id){
         return deleteObject(mapperNamespace.concat("deleteById"), id);
+    }
+
+    protected String getStatement(String sqlId){
+        return mapperNamespace.concat(sqlId);
+    }
+
+    protected String getExtStatement(String sqlId){
+        return extMapperNamespace.concat(sqlId);
     }
 
 }
