@@ -2,6 +2,7 @@ package ${domainPackage};
 <#if (lombokEnable?string('yes', 'no'))=='yes'>
 import lombok.Data;
 </#if>
+import com.zuche.framework.annotation.IbatisAliasConfig;
 <#if importList??>
 <#list importList as imp>
 import ${imp};
@@ -16,6 +17,7 @@ import ${imp};
 <#if (lombokEnable?string('yes', 'no'))=='yes'>
 @Data
 </#if>
+@IbatisAliasConfig(alias = "${domain}")
 public class ${domain} {
 
 <#if propertyList??>
