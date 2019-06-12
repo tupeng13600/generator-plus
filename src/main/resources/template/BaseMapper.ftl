@@ -17,7 +17,7 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
     private String extMapperNamespace;
 
     @SuppressWarnings("unchecked")
-    public BaseMapper(String mapperNamespace, String extMapperNamespace) {
+    public BaseMapper() {
         super(true);
         String namespace = this.getClass().getSimpleName();
         this.mapperNamespace = namespace.concat(".");
