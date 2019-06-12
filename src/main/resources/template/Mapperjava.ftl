@@ -13,10 +13,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ${domain}Mapper extends BaseMapper<${domain}, ${domain}Assembler> {
 
-    /** 这部分代码为自动生成代码, 一般情况无需修改 **/
-    public ${domain}Mapper(){
-        super("${domain}Mapper.", "${domain}ExtMapper.");
-    }
-    /** 这部分代码为自动生成代码, 一般情况无需修改 **/
-
 }

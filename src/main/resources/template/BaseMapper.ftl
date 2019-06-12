@@ -19,8 +19,10 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
     @SuppressWarnings("unchecked")
     public BaseMapper(String mapperNamespace, String extMapperNamespace) {
         super(true);
-        this.mapperNamespace = mapperNamespace;
-        this.extMapperNamespace = extMapperNamespace;
+        String namespace = this.getClass().getSimpleName();
+        this.mapperNamespace = namespace.concat(".");
+        int splitIndex = namespace.lastIndexOf("Mapper");
+        this.extMapperNamespace = namespace.substring(0, splitIndex).concat("Ext").concat(namespace.substring(splitIndex)).concat(".");
     }
 
     public List<D> getByAssembler(E assembler){
