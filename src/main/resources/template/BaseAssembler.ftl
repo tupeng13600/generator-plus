@@ -53,6 +53,9 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
     }
 
     public String getUpdatedCondition() {
+        if(updatedCondition != null) {
+            return updatedCondition.toString();
+        }
         List<String> updateList = new ArrayList<>();
         if(!updateConditionMap.isEmpty()) {
             updateConditionMap.forEach((column, value) -> {
