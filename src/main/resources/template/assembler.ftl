@@ -41,21 +41,16 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
 
     <#list propertyList as property>
     public ${domain}Assembler set${property.methodPropertyName}ToNull() {
-        if(null != value) {
-            nullConditionSet.add("${property.columnName}");
-        }
+        nullConditionSet.add("${property.columnName}");
         return this;
     }
     </#list>
 
     <#list propertyList as property>
         public ${domain}Assembler orderBy${property.methodPropertyName}ASC() {
-            if(null == orderByClause) {
-                orderByClause = " ${property.columnName} ASC ";
-            } else {
-                orderByClause = orderByClause + ", ${property.columnName} ASC";
-            }
-        return this;
+            orderByClause = null == orderByClause ? " ${property.columnName} ASC "
+                                            : orderByClause + ", ${property.columnName} ASC";
+            return this;
         }
     </#list>
 
