@@ -110,18 +110,18 @@ public class Generator {
         XmlMapperFactory.write();
     }
 
-    public static void main(String[] args) {
-        Generator.build().ip("10.104.50.25")
-                .port(3306)
-                .database("mmc_admin")
-                .user("mmcadmin_w")
-                .projectPath("/Users/tutu/IdeaProjects/generator-plus")
-                .password("aY2cpKmEJQNBh5Cc")
-                .repositoryPackage("com.uc.mmcmams.repository")
-                .addTables("t_user_test")
-                .gernerate();
-
-    }
+//    public static void main(String[] args) {
+//        Generator.build().ip("10.104.50.25")
+//                .port(3306)
+//                .database("mmc_admin")
+//                .user("mmcadmin_w")
+//                .projectPath("/Users/tutu/IdeaProjects/generator-plus")
+//                .password("aY2cpKmEJQNBh5Cc")
+//                .repositoryPackage("com.uc.mmcmams.repository")
+//                .addTables("t_user_test")
+//                .gernerate();
+//
+//    }
 
     private void validate(){
         if(StringUtils.isBlank(ip)) {
