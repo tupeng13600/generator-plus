@@ -48,6 +48,7 @@ public class TypeHandler {
         typeMap.put("VARCHAR", String.class);
         typeMap.put("TEXT", String.class);
         typeMap.put("MEDIUMTEXT", String.class);
+        typeMap.put("LONGTEXT", String.class);
         typeMap.put("ENUM", String.class);
     }
 
