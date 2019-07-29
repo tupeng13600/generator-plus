@@ -1,10 +1,20 @@
 package ${basePackage};
 
 import com.ucarinc.framework.autoconfigure.ubatis.dao.BaseUbatisDaoImpl;
+import com.ucarinc.framework.common.IbatisPageContext;
+import com.zuche.framework.dao.IbatisDaoImpl;
+import com.zuche.framework.dao.util.QueryCond;
+import com.zuche.framework.vo.SortNameMappingVO;
+import org.jmesa.limit.Limit;
+import org.jmesa.limit.SortSet;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.zuche.framework.utils.StringUtils.isBlank;
 
 /**
  *
@@ -16,6 +26,10 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
 
     private String extMapperNamespace;
 
+    private Class<D> clazz;
+    private Method loadJmesaVoMethod;
+    private Method toStrMethod;
+
     @SuppressWarnings("unchecked")
     public BaseMapper() {
         super(true);
@@ -23,7 +37,20 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
         this.mapperNamespace = namespace.concat(".");
         int splitIndex = namespace.lastIndexOf("Mapper");
         this.extMapperNamespace = namespace.substring(0, splitIndex).concat("Ext").concat(namespace.substring(splitIndex)).concat(".");
+
+        clazz = (Class<D>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        try {
+            loadJmesaVoMethod = IbatisDaoImpl.class.getDeclaredMethod("loadJmesaVO", Class.class);
+            loadJmesaVoMethod.setAccessible(true);
+
+            toStrMethod = IbatisDaoImpl.class.getDeclaredMethod("toStr", SortSet.class);
+            toStrMethod.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            logger.error("不支持的方法，请检查是否继承IbatisDaoImpl！ " + e.getMessage(), e);
+        }
+
     }
+
 
     public List<D> getByAssembler(E assembler){
         return (List<D>) super.queryForList(mapperNamespace.concat("getByAssembler"), assembler);
@@ -78,5 +105,63 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
     protected String getExtStatement(String sqlId){
         return extMapperNamespace.concat(sqlId);
     }
+
+    @SuppressWarnings("unchecked")
+    public <T> List<T> queryList(String statementId, Object queryParam) {
+        Limit limit = IbatisPageContext.getJmesaLimit();
+        if (limit == null && queryParam instanceof QueryCond) {
+        limit = ((QueryCond) queryParam).getLimit();
+        }
+
+        if (limit == null) {
+            if (queryParam instanceof BaseAssembler && statementId == null) {
+                    return (List<T>) getByAssembler((E) queryParam);
+                } else if (queryParam instanceof QueryCond) {
+                    QueryCond queryCond = (QueryCond) queryParam;
+                    return getSqlMapClientTemplate().queryForList(statementId, queryParam, queryCond.getStartIndex(),
+                    queryCond.getEndIndex(), null);
+                }
+                return queryForList(statementId, queryParam);
+            }
+            String orderByStr = null;
+            boolean isSort = limit.getSortSet().isSorted();
+            SortNameMappingVO mapping;
+            try {
+                mapping = (SortNameMappingVO) loadJmesaVoMethod.invoke(this, clazz);
+                if (!isSort && queryParam instanceof QueryCond) {
+                    orderByStr = ((QueryCond) queryParam).getDefaultOrder();
+                    if (isBlank(orderByStr)) {
+                        orderByStr = mapping.getDefaultName();
+                    }
+                } else if (isSort) {
+                    orderByStr = ordermapper(mapping.getMap(), (String) toStrMethod.invoke(this, limit.getSortSet()));
+                }
+            } catch (Exception e) {
+                logger.error("排序方法调用失败！" + e.getMessage(), e);
+            }
+            int start = limit.getRowSelect().getRowStart();
+            int end = limit.getRowSelect().getRowEnd();
+            if (queryParam instanceof QueryCond) {
+            if (isSort) {
+                ((QueryCond) queryParam).setOrderByColumn(" ORDER BY " + orderByStr);
+            }
+
+            if (((QueryCond) queryParam).getStartIndex() != -1) {
+                start = ((QueryCond) queryParam).getStartIndex();
+            }
+            if (((QueryCond) queryParam).getEndIndex() > 0) {
+                end = ((QueryCond) queryParam).getEndIndex();
+            }
+        }
+        if (queryParam instanceof BaseAssembler) {
+                BaseAssembler assembler = (BaseAssembler) queryParam;
+                assembler.setOffset(start);
+                assembler.setLimit(limit.getRowSelect().getMaxRows());
+                assembler.setOrderByClause(orderByStr);
+                return (List<T>) getByAssembler((E) queryParam);
+        }
+        return this.getSqlMapClientTemplate().queryForList(statementId, queryParam, start, end, null);
+    }
+
 
 }
