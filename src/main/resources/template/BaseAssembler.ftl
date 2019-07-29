@@ -6,6 +6,10 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.HashMap;
 
 /**
  * Assembler 基础生成类,无需修改
@@ -18,11 +22,15 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
 
     protected String conditionSql;
 
-    private String orderByClause;
+    protected String orderByClause;
 
     private boolean distinct;
 
     protected StringBuilder updatedCondition = null;
+
+    protected Map<String, Object> updateConditionMap = new HashMap<>();
+
+    protected Set<String> nullConditionSet = new HashSet<>();
 
     private List<T> oredCriteria;
 
@@ -47,6 +55,32 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
     public String getUpdatedCondition() {
         return null == updatedCondition ? null : updatedCondition.toString();
     }
+
+    public String getUpdatedCondition() {
+        List<String> updateList = new ArrayList<>();
+        if(!updateConditionMap.isEmpty()) {
+            updateConditionMap.forEach((column, value) -> {
+                if (nullConditionSet.contains(column)) {
+                    updateList.add(column + " = " + null);
+                    nullConditionSet.remove(column);
+                } else {
+                    updateList.add(column + " = " + handlerVal(value));
+                }
+            });
+        }
+
+        if(!nullConditionSet.isEmpty()) {
+            nullConditionSet.forEach(column -> updateList.add(column + " = null"));
+        }
+
+        String result = null;
+        if(!updateList.isEmpty()) {
+            result = " ".concat(String.join(", ", updateList)).concat(" ");
+        }
+        return result;
+    }
+
+
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;

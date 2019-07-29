@@ -29,6 +29,11 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
         return (List<D>) super.queryForList(mapperNamespace.concat("getByAssembler"), assembler);
     }
 
+    public List<D> getOneByAssembler(E assembler){
+        List<D> domainList = (List<D>) super.queryForList(mapperNamespace.concat("getByAssembler"), assembler);
+        return null != domainList && !domainList.isEmpty() ? domainList.get(0) : null;
+    }
+
     public D getById(Long id){
         return (D) super.queryForObject(mapperNamespace.concat("getById"), id);
     }

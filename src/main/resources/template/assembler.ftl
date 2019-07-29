@@ -32,21 +32,42 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
 
     <#list propertyList as property>
     public ${domain}Assembler set${property.methodPropertyName}(${property.typeName} value) {
-
-        if(null == value) {
-            return this;
-        }
-
-        if(updatedCondition == null) {
-            updatedCondition = new StringBuilder();
-            updatedCondition.append(" ")
-                .append("${property.columnName} = ")
-                .append(handlerVal(value));
-        } else {
-            updatedCondition.append(", ${property.columnName} = ").append(handlerVal(value));
+        if(null != value) {
+            updateConditionMap.put("${property.columnName}", value);
         }
         return this;
     }
+    </#list>
+
+    <#list propertyList as property>
+    public ${domain}Assembler set${property.methodPropertyName}ToNull() {
+        if(null != value) {
+            nullConditionSet.add("${property.columnName}");
+        }
+        return this;
+    }
+    </#list>
+
+    <#list propertyList as property>
+        public ${domain}Assembler orderBy${property.methodPropertyName}ASC() {
+            if(null == orderByClause) {
+                orderByClause = " ${property.columnName} ASC ";
+            } else {
+                orderByClause = orderByClause + ", ${property.columnName} ASC";
+            }
+        return this;
+        }
+    </#list>
+
+    <#list propertyList as property>
+        public ${domain}Assembler orderBy${property.methodPropertyName}DESC() {
+            if(null == orderByClause) {
+                orderByClause = " ${property.columnName} DESC ";
+            } else {
+                orderByClause = orderByClause + ", ${property.columnName} DESC";
+            }
+            return this;
+        }
     </#list>
 
     public static class Criteria extends BaseAssembler.GeneratedCriteria {
