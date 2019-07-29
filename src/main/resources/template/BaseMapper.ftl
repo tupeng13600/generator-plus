@@ -106,6 +106,10 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
         return extMapperNamespace.concat(sqlId);
     }
 
+    public <T> List<T> queryList(E e) {
+        return this.queryList(null, e);
+    }
+
     @SuppressWarnings("unchecked")
     public <T> List<T> queryList(String statementId, Object queryParam) {
         Limit limit = IbatisPageContext.getJmesaLimit();
