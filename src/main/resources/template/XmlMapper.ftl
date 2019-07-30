@@ -139,6 +139,19 @@
         </dynamic>
     </update>
 
+    <update id="updateAllById" parameterClass="${domainPackage}.${domain}">
+        <dynamic>
+            UPDATE ${tableName} SET
+            id = id
+            <#list propertyList as property>
+                <#if property.name != 'id'>
+                ${property.columnName} = ${r'#'}${property.name}${r'#'}
+                </#if>
+            </#list>
+            WHERE id = ${r'#'}id${r'#'}
+        </dynamic>
+    </update>
+
     <delete id="deleteById" parameterClass="java.lang.Long">
         DELETE FROM ${tableName} WHERE id = #id#;
     </delete>

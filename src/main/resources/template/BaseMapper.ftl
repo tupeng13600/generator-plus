@@ -94,6 +94,14 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
         return list.size();
     }
 
+    public Integer updateAllById(D domain){
+        return update(mapperNamespace.concat("updateAllById"), domain);
+    }
+
+    public Integer updateById(D domain){
+        return update(mapperNamespace.concat("updateById"), domain);
+    }
+
     public Integer deleteById(Long id){
         return deleteObject(mapperNamespace.concat("deleteById"), id);
     }

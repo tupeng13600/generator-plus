@@ -24,6 +24,14 @@ public abstract class BaseRepository<D, E, M extends BaseMapper<D, E>> {
         return getMapper().updateBatch(list);
     }
 
+    public Integer updateAllById(D domain) {
+        return getMapper().updateAllById(domain);
+    }
+
+    public Integer updateById(D domain) {
+        return getMapper().updateById(domain);
+    }
+
     public D getById(Long id) {
         return getMapper().getById(id);
     }
