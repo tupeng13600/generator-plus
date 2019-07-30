@@ -142,10 +142,9 @@
     <update id="updateAllById" parameterClass="${domainPackage}.${domain}">
         <dynamic>
             UPDATE ${tableName} SET
-            id = id
             <#list propertyList as property>
                 <#if property.name != 'id'>
-                ${property.columnName} = ${r'#'}${property.name}${r'#'}
+                ${property.columnName} = ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
                 </#if>
             </#list>
             WHERE id = ${r'#'}id${r'#'}
