@@ -34,7 +34,7 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
 
     private List<T> oredCriteria;
 
-    private String fields;
+    protected String fields;
 
     private Integer limit;
 
@@ -349,26 +349,9 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
         return val;
     }
 
-    protected abstract String getColumn(String field);
-
-    public BaseAssembler<T> fields(String... fields) {
-        if(null == fields || fields.length == 0) {
-            this.fields = null;
-        } else {
-            StringBuilder builder = new StringBuilder();
-            for(String field : fields) {
-                String column = getColumn(field);
-                if(null == column) {
-                    column = field;
-                }
-                builder.append(column).append(" AS ").append(field).append(",");
-            }
-            String desFields = builder.toString();
-            desFields = desFields.substring(0, desFields.length() - 1);
-            this.fields = desFields;
-        }
-        return this;
+    @Override
+    protected String getColumn(String field) {
+        return null;
     }
-
 
 }

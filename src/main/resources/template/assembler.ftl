@@ -20,7 +20,6 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
         super();
     }
 
-    @Override
     protected Criteria createCriteriaInternal() {
         return new Criteria();
     }
@@ -156,6 +155,10 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
             this.columnName = columnName;
         }
 
+        public String getColumnName(){
+            return this.columnName;
+        }
+
         public static String getColumn(String field) {
             try{
                 return Field.valueOf(field).columnName;
@@ -163,6 +166,21 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
                 return null;
             }
         }
+    }
+
+    public EsClusterAssembler fields(Field... fields) {
+        if(null == fields || fields.length == 0) {
+            super.fields = null;
+        } else {
+            StringBuilder builder = new StringBuilder();
+            for(Field field : fields) {
+                builder.append(field.getColumnName()).append(" AS ").append(field.name()).append(",");
+            }
+            String desFields = builder.toString();
+            desFields = desFields.substring(0, desFields.length() - 1);
+            this.fields = desFields;
+        }
+        return this;
     }
 
 }
