@@ -144,7 +144,7 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
         </#list>
     }
 
-    private enum Field{
+    public enum Field{
         <#list propertyList as property>
         ${property.name}("${property.columnName}"),
         </#list>
