@@ -168,7 +168,7 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
         }
     }
 
-    public EsClusterAssembler fields(Field... fields) {
+    public ${domain}Assembler fields(Field... fields) {
         if(null == fields || fields.length == 0) {
             super.fields = null;
         } else {
