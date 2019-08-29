@@ -349,7 +349,7 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
         return val;
     }
 
-    @Override
+
     protected String getColumn(String field) {
         return null;
     }

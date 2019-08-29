@@ -81,6 +81,9 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
         if(null == list || list.size() == 0) {
             return 0;
         }
+        if(list.size() > 200) {
+
+        }
         Map<String,List<D>> insertMap = new HashMap<>();
         insertMap.put("list", list);
         return (Integer)super.insert(mapperNamespace.concat("insertBatch"), insertMap);
