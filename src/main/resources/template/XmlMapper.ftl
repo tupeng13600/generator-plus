@@ -6,16 +6,16 @@
     <sql id="allFieldMap">
         <#list propertyList as property>
         <#if property_has_next>
-            ${property.columnName} AS ${property.name},
+            `${property.columnName}` AS `${property.name}`,
         <#else>
-            ${property.columnName} AS ${property.name}
+            `${property.columnName}` AS `${property.name}`
         </#if>
         </#list>
     </sql>
 
     <sql id="AllFields">
         <#list propertyList as property>
-            ${property.columnName}<#if property_has_next>,</#if>
+            `${property.columnName}`<#if property_has_next>,</#if>
         </#list>
     </sql>
 
@@ -64,7 +64,7 @@
             <dynamic prepend=" ">
                 <#list propertyList as property>
                 <isNotNull property="${property.name}"  prepend="," removeFirstPrepend="true">
-                    ${property.columnName}
+                    `${property.columnName}`
                 </isNotNull>
                 </#list>
             </dynamic>
@@ -88,7 +88,7 @@
         <dynamic>
             (
             <#list propertyList as property>
-                ${property.columnName}<#if property_has_next>,</#if>
+                `${property.columnName}`<#if property_has_next>,</#if>
             </#list>
             )
             VALUES
@@ -131,7 +131,7 @@
                 <#list propertyList as property>
                 <#if property.name != 'id'>
                 <isNotNull property="${property.name}" prepend=",">
-                ${property.columnName} = ${r'#'}${property.name}${r'#'}
+                `${property.columnName}` = ${r'#'}${property.name}${r'#'}
                 </isNotNull>
                 </#if>
                 </#list>
@@ -144,7 +144,7 @@
             UPDATE ${tableName} SET
             <#list propertyList as property>
                 <#if property.name != 'id'>
-                ${property.columnName} = ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
+                `${property.columnName}` = ${r'#'}${property.name}${r'#'}<#if property_has_next>,</#if>
                 </#if>
             </#list>
             WHERE id = ${r'#'}id${r'#'}

@@ -60,16 +60,16 @@ public abstract class BaseAssembler<T extends BaseAssembler.GeneratedCriteria> {
         if(!updateConditionMap.isEmpty()) {
             updateConditionMap.forEach((column, value) -> {
                 if (nullConditionSet.contains(column)) {
-                    updateList.add(column + " = " + null);
+                    updateList.add("`" + column + "` = " + null);
                     nullConditionSet.remove(column);
                 } else {
-                    updateList.add(column + " = " + handlerVal(value));
+                    updateList.add("`" + column + "` = " + handlerVal(value));
                 }
             });
         }
 
         if(!nullConditionSet.isEmpty()) {
-            nullConditionSet.forEach(column -> updateList.add(column + " = null"));
+            nullConditionSet.forEach(column -> updateList.add("`" + column + "` = null"));
         }
 
         String result = null;

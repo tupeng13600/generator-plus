@@ -70,73 +70,73 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
         }
         <#list propertyList as property>
         public Criteria and${property.methodPropertyName}IsNull() {
-            addCriterion("${property.columnName} is null");
+            addCriterion("`${property.columnName}` is null");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}IsNotNull() {
-            addCriterion("${property.columnName} is not null");
+            addCriterion("`${property.columnName}` is not null");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}EqualTo(${property.typeName} value) {
-            addCriterion("${property.columnName} =", value, "${property.name}");
+            addCriterion("`${property.columnName}` =", value, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}NotEqualTo(${property.typeName} value) {
-            addCriterion("${property.columnName} <>", value, "${property.name}");
+            addCriterion("`${property.columnName}` <>", value, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}GreaterThan(${property.typeName} value) {
-            addCriterion("${property.columnName} >", value, "${property.name}");
+            addCriterion("`${property.columnName}` >", value, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}GreaterThanOrEqualTo(${property.typeName} value) {
-            addCriterion("${property.columnName} >=", value, "${property.name}");
+            addCriterion("`${property.columnName}` >=", value, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}LessThan(${property.typeName} value) {
-            addCriterion("${property.columnName} <", value, "${property.name}");
+            addCriterion("`${property.columnName}` <", value, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}LessThanOrEqualTo(${property.typeName} value) {
-            addCriterion("${property.columnName} <=", value, "${property.name}");
+            addCriterion("`${property.columnName}` <=", value, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}In(List<${property.typeName}> values) {
-            addCriterion("${property.columnName} in", values, "${property.name}");
+            addCriterion("`${property.columnName}` in", values, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}NotIn(List<${property.typeName}> values) {
-            addCriterion("${property.columnName} not in", values, "${property.name}");
+            addCriterion("`${property.columnName}` not in", values, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}Between(${property.typeName} value1, ${property.typeName} value2) {
-            addCriterion("${property.columnName} between", value1, value2, "${property.name}");
+            addCriterion("`${property.columnName}` between", value1, value2, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}NotBetween(${property.typeName} value1, ${property.typeName} value2) {
-            addCriterion("${property.columnName} not between", value1, value2, "${property.name}");
+            addCriterion("`${property.columnName}` not between", value1, value2, "${property.name}");
             return this;
         }
 
         <#if property.typeName=="String">
         public Criteria and${property.methodPropertyName}NotLike(String value) {
-            addCriterion("${property.columnName} not like", value, "${property.name}");
+            addCriterion("`${property.columnName}` not like", value, "${property.name}");
             return this;
         }
 
         public Criteria and${property.methodPropertyName}Like(String value) {
-            addCriterion("${property.columnName} like", value, "${property.name}");
+            addCriterion("`${property.columnName}` like", value, "${property.name}");
             return this;
         }
         </#if>
@@ -174,7 +174,7 @@ public class ${domain}Assembler extends BaseAssembler<${domain}Assembler.Criteri
         } else {
             StringBuilder builder = new StringBuilder();
             for(Field field : fields) {
-                builder.append(field.getColumnName()).append(" AS ").append(field.name()).append(",");
+                builder.append("`" + field.getColumnName()).append("` AS `").append(field.name() + "`").append(",");
             }
             String desFields = builder.toString();
             desFields = desFields.substring(0, desFields.length() - 1);
