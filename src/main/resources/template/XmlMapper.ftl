@@ -155,4 +155,13 @@
         DELETE FROM ${tableName} WHERE id = #id#;
     </delete>
 
+    <delete id="deleteByAssembler" parameterClass="${assemblerPackage}.${domain}Assembler">
+        DELETE FROM ${tableName} WHERE 1=1
+        <dynamic>
+            <isNotNull property="conditionSql">
+                <![CDATA[ $conditionSql$ ]]>
+            </isNotNull>
+        </dynamic>
+    </delete>
+
 </sqlMap>

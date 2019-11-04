@@ -109,6 +109,11 @@ public abstract class BaseMapper<D, E> extends BaseUbatisDaoImpl {
         return deleteObject(mapperNamespace.concat("deleteById"), id);
     }
 
+    public Integer deleteByAssembler(E assembler){
+        return deleteObject(mapperNamespace.concat("deleteByAssembler"), assembler);
+    }
+
+
     protected String getStatement(String sqlId){
         return mapperNamespace.concat(sqlId);
     }
